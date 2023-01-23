@@ -1,8 +1,13 @@
 import { useState } from 'react';
 
 function Login() {
+  const userEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  const MAX_PASSWORD_LENGTH = 6;
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   return (
     <form className="form">
 
@@ -25,6 +30,7 @@ function Login() {
       <button
         data-testid="common_login__button-login"
         type="button"
+        disabled={ !(password.length >= MAX_PASSWORD_LENGTH && userEmail.test(email)) }
       >
         LOGIN
       </button>

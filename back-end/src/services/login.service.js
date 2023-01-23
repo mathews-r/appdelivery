@@ -1,14 +1,21 @@
 const { User } =  require('../database/models');
+const md5 = require('md5')
 
-const validateLogin = async (email, password) => {
-  const user = await User.findOne({ where: { email } });
+const findUser = async (email) => {
+  return await User.findOne({ where: { email } });
+}
 
-  if (!user || user.password != password) {
+const validateLogin = async (user, password) => {
+  if (!user || user.password != md5(password)) {
     const throwError = { status: 404, message: 'Invalid email or password' };
     throw throwError;
   }
-
-  return null;
 };
 
-module.exports = { validateLogin };
+const login = async (email, password) => {
+  const user = await findUser(email);
+  await validateLogin(user, password)
+  return { status: 200, message: 'Successful' };
+}
+
+module.exports = { validateLogin, login };

@@ -21,10 +21,8 @@ const login = async (email, password) => {
   return {
     status: 200,
     message: {
-      id: user.id,
       name: user.name,
       email: user.email,
-      password: user.password,
       role: user.role,
       token,
     },

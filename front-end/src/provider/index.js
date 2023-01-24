@@ -8,5 +8,5 @@ export default function Provider({ children }) {
   );
 }
 Provider.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: node.isRequired,
 };

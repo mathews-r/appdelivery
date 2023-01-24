@@ -12,10 +12,8 @@ const userMock = {
 const tokenMock = 'token';
 
 const userMockWithToken = {
-  id: 3,
   name: 'Cliente Zé Birita',
   email: 'zebirita@email.com',
-  password: 'e10adc3949ba59abbe56e057f20f883e',
   role: 'customer',
   token: {}
 }

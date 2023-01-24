@@ -43,8 +43,9 @@ const newUser = async (body) => {
     throw throwError;
   }
 
-  const user = await User.create({ ...body, password, role });
-  return user;
+  const { dataValues } = await User.create({ ...body, password, role });
+
+  return { name: dataValues.name, email: dataValues.email, password: dataValues.password };
 };
 
 module.exports = { validateLogin, login, newUser };

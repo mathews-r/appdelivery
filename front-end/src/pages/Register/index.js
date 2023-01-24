@@ -1,3 +1,7 @@
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import api from '../../service/request';
+
 function Register() {
   const userEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -12,7 +16,7 @@ function Register() {
 
   const register = async () => {
     try {
-      // await api.post.register({ name,email, password });
+      await api.post.register({ name, email, password });
       setIsLogged(true);
       navigate('/customer/products');
     } catch (error) {
@@ -59,7 +63,7 @@ function Register() {
       </button>
 
       { !isLogged && (
-        <h1 data-testid="common_register__element-invalid-register">
+        <h1 data-testid="common_register__element-invalid_register">
           INVALID USER OR EMAIL
         </h1>
       )}

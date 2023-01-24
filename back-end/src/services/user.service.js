@@ -10,24 +10,34 @@ const validateLogin = async (user, password) => {
     const throwError = { status: 404, message: 'Invalid email or password' };
     throw throwError;
   }
+  return true;
 };
 
 const login = async (email, password) => {
   const user = await findUserByEmail(email);
   await validateLogin(user, password);
-
   const token = generateToken(email, user.id, user.role);
 
-  return { status: 200, token };
+  return {
+    status: 200,
+    message: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      role: user.role,
+      token,
+    },
+  };
 };
 
 const newUser = async (body) => {
   const role = 'customer';
   const password = md5(body.password);
- 
+
   const findName = await findUserByName(body.name);
   const findEmail = await findUserByEmail(body.email);
-  
+
   if (findName || findEmail) {
     const throwError = { status: 409, message: 'User already registred' };
     throw throwError;

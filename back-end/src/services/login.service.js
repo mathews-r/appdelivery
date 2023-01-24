@@ -1,9 +1,7 @@
 const md5 = require('md5');
 const { User } = require('../database/models');
 
-const findUser = async (email) => {
-  await User.findOne({ where: { email } });
-};
+const findUser = (email) => User.findOne({ where: { email } });
 
 const validateLogin = async (user, password) => {
   if (!user || user.password !== md5(password)) {

@@ -1,3 +1,4 @@
+import { node } from 'prop-types';
 import context from '../context';
 
 export default function Provider({ children }) {

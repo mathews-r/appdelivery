@@ -18,10 +18,8 @@ const api = {
     },
   },
   get: {
-    async allProducts() {
-      const response = await axios.get(
-        'http://localhost:3001/products',
-      );
+    async getProducts() {
+      const response = await axios.get('http://localhost:3001/products');
       return response;
     },
   },

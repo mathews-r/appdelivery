@@ -16,6 +16,7 @@ function Login() {
     try {
       await api.post.login({ email, password });
       setIsLogged(true);
+
       navigate('/customer/products');
     } catch (error) {
       setIsLogged(false);

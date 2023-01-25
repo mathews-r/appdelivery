@@ -17,6 +17,14 @@ const api = {
       return response;
     },
   },
+  get: {
+    async allProducts() {
+      const response = await axios.get(
+        'http://localhost:3001/products',
+      );
+      return response;
+    },
+  },
 };
 
 export default api;

@@ -1,12 +1,19 @@
-import context from '../context';
+import { node } from 'prop-types';
+import { useState } from 'react';
+import { userContext } from '../context';
 
-export default function Provider({ children }) {
+export default function UserProvider({ children }) {
+  const { userData, setUserData } = useState({});
+  const context = {
+    userData,
+    setUserData,
+  };
   return (
-    <context.Provider value={ context }>
+    <userContext.Provider value={ context }>
       {children}
-    </context.Provider>
+    </userContext.Provider>
   );
 }
-Provider.propTypes = {
-  children: PropTypes.node.isRequired,
+UserProvider.propTypes = {
+  children: node.isRequired,
 };

@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { userContext } from '../../context';
 import api from '../../service/request';
 
 function Login() {
@@ -11,10 +12,12 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLogged, setIsLogged] = useState(true);
+  const { storageUser } = useContext(userContext);
 
   const login = async () => {
     try {
-      await api.post.login({ email, password });
+      const data = await api.post.login({ email, password });
+      storageUser(data);
       setIsLogged(true);
 
       navigate('/customer/products');

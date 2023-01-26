@@ -22,6 +22,10 @@ const api = {
       const response = await axios.get('http://localhost:3001/products');
       return response;
     },
+    async getListRequests() {
+      const response = await axios.get('http://localhost:3001/seller/orders');
+      return response;
+    },
   },
 };
 

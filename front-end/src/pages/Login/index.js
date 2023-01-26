@@ -16,12 +16,14 @@ function Login() {
 
   const login = async () => {
     try {
-      const data = await api.post.login({ email, password });
-      storageUser(data);
-      setIsLogged(true);
+      const { data } = await api.post.login({ email, password });
 
+      setUserData(data);
+      setIsLogged(true);
+      storageUser(data);
       navigate('/customer/products');
     } catch (error) {
+      console.log(error);
       setIsLogged(false);
     }
   };
@@ -50,7 +52,7 @@ function Login() {
         disabled={
           !(password.length >= MAX_PASSWORD_LENGTH && userEmail.test(email))
         }
-        onClick={ () => login() }
+        onClick={ login }
       >
         LOGIN
       </button>

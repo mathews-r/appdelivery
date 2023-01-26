@@ -1,21 +1,25 @@
-export default function ProductCard() {
+import { string, number } from 'prop-types';
+
+export default function ProductCard({ id, name, image, price }) {
   return (
     <section>
       <div>
+        <img
+          data-testid={ `customer_products__img-card-bg-image-${id}` }
+          src={ image }
+          alt=""
+        />
         <h2
           data-testid={ `customer_products__element-card-price-${id}` }
         >
           {`R$ ${price}`}
         </h2>
-        <img
-          data-testid={ `customer_products__img-card-bg-image-${id}` }
-          src={ url_image }
-          alt=""
-        />
+
       </div>
       <h2 data-testid={ `customer_products__element-card-title-${id}` }>
         { name }
       </h2>
+
       <div>
         <button
           type="button"
@@ -25,7 +29,7 @@ export default function ProductCard() {
         </button>
         <input
           data-testid={ `customer_products__input-card-quantity-${id}` }
-          value={ quatity }
+          value="0"
         />
         <button
           type="button"
@@ -37,3 +41,10 @@ export default function ProductCard() {
     </section>
   );
 }
+
+ProductCard.propTypes = {
+  id: number.isRequired,
+  name: string.isRequired,
+  image: string.isRequired,
+  price: string.isRequired,
+};

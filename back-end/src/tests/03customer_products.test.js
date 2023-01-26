@@ -9,7 +9,7 @@ const app = require("../api/app");
 const { mockProducts } = require("./mocks/mockProduct");
 
 describe("Testes na rota /products", () => {
-  describe("Testes com POST", () => {
+  describe("Testes com GET", () => {
     it("Deve retornar todos os produtos", async () => {
       sinon.stub(Product, 'findAll').resolves(mockProducts);
 

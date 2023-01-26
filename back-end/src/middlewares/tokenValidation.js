@@ -13,10 +13,9 @@ const tokenValidation = async (req, res, next) => {
   try {
     const user = jwt.verify(authorization, JWT_SECRET);
     req.body.user = user;
-    return next();
+    next();
   } catch (error) {
-    const e = res.status(401).json({ message: 'Expired or invalid token ' });
-    next(e);
+    return res.status(401).json({ message: 'Expired or invalid token' });
   }
 };
 

@@ -1,11 +1,8 @@
 import { string, number } from 'prop-types';
-import { useState, useEffect, useContext } from 'react';
-import { productsContext } from '../../context';
+import { useState, useEffect } from 'react';
 
 export default function ProductCard({ id, name, image, price }) {
   const [quantity, setQuantity] = useState(0);
-  const [dataProduct, setDataProduct] = useState({
-  });
 
   const findBeer = (array) => {
     const beer = array.filter((bebida) => bebida.id !== id);
@@ -14,13 +11,6 @@ export default function ProductCard({ id, name, image, price }) {
 
   function changeQuantity({ title }) {
     let value = quantity;
-    if (value === 0) {
-      // const localStor = JSON.parse(localStorage.getItem('carrinho'));
-      // const beer = findBeer(localStor);
-      // console.log(beer);
-      // localStorage.setItem('carrinho', JSON.stringify(beer));
-      console.log('entrou');
-    }
 
     if (title.includes('remove') && value > 0) {
       value -= 1;
@@ -38,6 +28,14 @@ export default function ProductCard({ id, name, image, price }) {
       localStorage.setItem('carrinho', JSON.stringify([...beer, teste]));
       setQuantity(value);
     }
+
+    if (title.includes('remove') && value === 0) {
+      const localStor = JSON.parse(localStorage.getItem('carrinho'));
+      const beer = findBeer(localStor);
+      console.log(beer);
+      localStorage.setItem('carrinho', JSON.stringify(beer));
+    }
+
     if (title.includes('add')) {
       value += 1;
       const teste = {

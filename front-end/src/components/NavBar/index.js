@@ -5,7 +5,6 @@ import { userContext } from '../../context';
 export default function NavBar() {
   const { logOut } = useContext(userContext);
   const getStorage = JSON.parse(localStorage.getItem('user'));
-  console.log(getStorage);
   return (
     <nav>
       <section>

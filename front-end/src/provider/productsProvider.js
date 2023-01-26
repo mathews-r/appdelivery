@@ -1,9 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { node } from 'prop-types';
-import { useEffect, useMemo, useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useMemo } from 'react';
 import { productsContext } from '../context';
-// import api from '../service/request';
 
 export default function ProductsProvider({ children }) {
   function storageProducts() {

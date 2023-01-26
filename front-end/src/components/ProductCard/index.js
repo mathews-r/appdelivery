@@ -7,33 +7,55 @@ export default function ProductCard({ id, name, image, price }) {
   const [dataProduct, setDataProduct] = useState({
   });
 
+  const findBeer = (array) => {
+    const beer = array.filter((bebida) => bebida.id !== id);
+    return beer;
+  };
+
   function changeQuantity({ title }) {
     let value = quantity;
     if (value === 0) {
-      setQuantity(0);
+      // const localStor = JSON.parse(localStorage.getItem('carrinho'));
+      // const beer = findBeer(localStor);
+      // console.log(beer);
+      // localStorage.setItem('carrinho', JSON.stringify(beer));
+      console.log('entrou');
     }
-    // const teste = parseFloat(unitPrice.replace(',', '.'));
+
     if (title.includes('remove') && value > 0) {
       value -= 1;
 
-      setQuantity(value);
-      setDataProduct({
+      const localStor = JSON.parse(localStorage.getItem('carrinho'));
+      const beer = findBeer(localStor);
+
+      const teste = {
         id,
         name,
         quantity: value,
         unitPrice: price,
         subTotal: parseFloat(price.replace(',', '.')) * value,
-      });
+      };
+      localStorage.setItem('carrinho', JSON.stringify([...beer, teste]));
+      setQuantity(value);
     }
     if (title.includes('add')) {
       value += 1;
+      const teste = {
+        id,
+        name,
+        quantity: value,
+        unitPrice: price,
+        subTotal: parseFloat(price.replace(',', '.')) * value,
+      };
+      const localStor = JSON.parse(localStorage.getItem('carrinho'));
+      const beer = findBeer(localStor);
+
+      localStorage.setItem('carrinho', JSON.stringify([...beer, teste]));
       setQuantity(value);
     }
   }
 
-  useEffect(() => ({
-
-  }), [quantity]);
+  useEffect(() => { localStorage.setItem('carrinho', JSON.stringify([])); }, []);
 
   return (
     <section>

@@ -1,31 +1,18 @@
 import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { userContext } from '../../context';
-import api from '../../service/request';
 
 function Login() {
   const userEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   const MAX_PASSWORD_LENGTH = 6;
 
-  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLogged, setIsLogged] = useState(true);
-  const { storageUser } = useContext(userContext);
+
+  const { signIn, isLogged } = useContext(userContext);
 
   const login = async () => {
-    try {
-      const { data } = await api.post.login({ email, password });
-
-      setUserData(data);
-      setIsLogged(true);
-      storageUser(data);
-      navigate('/customer/products');
-    } catch (error) {
-      console.log(error);
-      setIsLogged(false);
-    }
+    await signIn(email, password);
   };
 
   return (

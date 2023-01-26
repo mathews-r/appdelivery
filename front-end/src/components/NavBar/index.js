@@ -4,7 +4,8 @@ import { userContext } from '../../context';
 
 export default function NavBar() {
   const { logOut } = useContext(userContext);
-
+  const getStorage = JSON.parse(localStorage.getItem('user'));
+  console.log(getStorage);
   return (
     <nav>
       <section>
@@ -26,7 +27,11 @@ export default function NavBar() {
           to="/customer/products"
           data-testid="customer_products__element-navbar-user-full-name"
         >
-          <button type="button">nome usuario</button>
+          <button
+            type="button"
+          >
+            {getStorage.name}
+          </button>
         </Link>
 
         <Link

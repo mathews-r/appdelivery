@@ -6,12 +6,15 @@ import api from '../../service/request';
 function CustomerProducts() {
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    api.get.getAllProducts()
+  async function loadProducts() {
+    await api.get.getAllProducts()
       .then(({ data }) => {
         console.log(data);
         setProducts(data);
       });
+  }
+  useEffect(() => {
+    loadProducts();
   }, []);
   return (
     <main>

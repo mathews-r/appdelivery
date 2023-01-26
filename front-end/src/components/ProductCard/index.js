@@ -1,6 +1,40 @@
 import { string, number } from 'prop-types';
+import { useState, useEffect, useContext } from 'react';
+import { productsContext } from '../../context';
 
 export default function ProductCard({ id, name, image, price }) {
+  const [quantity, setQuantity] = useState(0);
+  const [dataProduct, setDataProduct] = useState({
+  });
+
+  function changeQuantity({ title }) {
+    let value = quantity;
+    if (value === 0) {
+      setQuantity(0);
+    }
+    // const teste = parseFloat(unitPrice.replace(',', '.'));
+    if (title.includes('remove') && value > 0) {
+      value -= 1;
+
+      setQuantity(value);
+      setDataProduct({
+        id,
+        name,
+        quantity: value,
+        unitPrice: price,
+        subTotal: parseFloat(price.replace(',', '.')) * value,
+      });
+    }
+    if (title.includes('add')) {
+      value += 1;
+      setQuantity(value);
+    }
+  }
+
+  useEffect(() => ({
+
+  }), [quantity]);
+
   return (
     <section>
       <div>
@@ -17,23 +51,29 @@ export default function ProductCard({ id, name, image, price }) {
 
       </div>
       <h2 data-testid={ `customer_products__element-card-title-${id}` }>
-        { name }
+        {name}
       </h2>
 
       <div>
         <button
           type="button"
           data-testid={ `customer_products__button-card-rm-item-${id}` }
+          title="remove"
+          onClick={ (e) => changeQuantity(e.target) }
         >
           -
         </button>
         <input
+          type="text"
           data-testid={ `customer_products__input-card-quantity-${id}` }
-          value="0"
+          value={ quantity }
+          onChange={ (e) => setQuantity(e.target.value) }
         />
         <button
           type="button"
           data-testid={ `customer_products__button-card-add-item-${id}` }
+          title="add"
+          onClick={ (e) => changeQuantity(e.target) }
         >
           +
         </button>

@@ -1,11 +1,12 @@
 import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { userContext } from '../../context';
 
 function Login() {
   const userEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   const MAX_PASSWORD_LENGTH = 6;
-
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 

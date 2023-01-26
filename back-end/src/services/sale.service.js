@@ -17,11 +17,11 @@ const newSale = async (body) => {
   const { products } = body;
 
   const sale = await Sale.create({
-    user_id: id,
-    seller_id: body.sellerId,
-    delivery_address: body.deliveryAddress,
-    delivery_number: body.deliveryNumber,
-    total_price: await totalPrice(products),
+    userId: id,
+    sellerId: body.sellerId,
+    deliveryAddress: body.deliveryAddress,
+    deliveryNumber: body.deliveryNumber,
+    totalPrice: await totalPrice(products),
     status: 'Pendente',
   });
 

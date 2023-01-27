@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import NavBar from '../../components/NavBar';
 import ProductCard from '../../components/ProductCard';
 import api from '../../service/request';
@@ -6,6 +7,7 @@ import api from '../../service/request';
 function CustomerProducts() {
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState();
+  const navigate = useNavigate();
 
   async function loadProducts() {
     await api.get.getAllProducts()
@@ -38,7 +40,11 @@ function CustomerProducts() {
     <main>
       <NavBar />
 
-      <button type="button" data-testid="customer_products__button-cart">
+      <button
+        type="button"
+        data-testid="customer_products__button-cart"
+        onClick={ () => navigate('/customer/checkout') }
+      >
         <p>Ver carrinho: R$</p>
         <p data-testid="customer_products__checkout-bottom-value">
           {`${total ? total.toFixed(2).replace('.', ',') : 0}`}

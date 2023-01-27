@@ -26,6 +26,10 @@ const api = {
       const response = await axios.get(`http://localhost:3001/products/${id}`);
       return response;
     },
+    async getAllSellers() {
+      const response = await axios.get('http://localhost:3001/users');
+      return response;
+    },
   },
 };
 

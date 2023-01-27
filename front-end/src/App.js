@@ -6,6 +6,7 @@ import CustomerProducts from './pages/custome_products';
 import UserProvider from './provider/index';
 import ProductsProvider from './provider/productsProvider';
 import './style.css';
+import CustomerCheckout from './pages/CustomerCheckout';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/login" element={ <Login /> } />
             <Route path="/register" element={ <Register /> } />
             <Route path="/customer/products" element={ <CustomerProducts /> } />
+            <Route path="/customer/checkout" element={ <CustomerCheckout /> } />
           </Routes>
         </ProductsProvider>
       </UserProvider>

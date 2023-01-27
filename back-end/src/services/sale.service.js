@@ -30,4 +30,9 @@ const newSale = async (body) => {
   return sale;
 };
 
-module.exports = { newSale };
+const getSaleByUser = async (userId) => {
+  const sale = await Sale.findOne({ userId });
+  return sale;
+}
+
+module.exports = { newSale, getSaleByUser };

@@ -6,6 +6,8 @@ import CustomerProducts from './pages/custome_products';
 import UserProvider from './provider/index';
 import ProductsProvider from './provider/productsProvider';
 import './style.css';
+import CustomerOrders from './pages/CustomerOrders';
+import OrderDetails from './pages/OrderDetails';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
             <Route path="/login" element={ <Login /> } />
             <Route path="/register" element={ <Register /> } />
             <Route path="/customer/products" element={ <CustomerProducts /> } />
+            <Route exact path="/customer/orders" element={ <CustomerOrders /> } />
+            <Route path="/customer/orders/:id" element={ <OrderDetails /> } />
           </Routes>
         </ProductsProvider>
       </UserProvider>

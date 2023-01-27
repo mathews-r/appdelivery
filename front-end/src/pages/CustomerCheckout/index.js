@@ -9,12 +9,21 @@ export default function CustomerCheckout() {
 
   const handleTotal = (storage) => {
     const totalPrice = storage.reduce((acc, curr) => acc + curr.subTotal, 0);
-    setTotal(totalPrice);
+    setTotal(totalPrice.toFixed(2).replace('.', ','));
   };
 
   const getAllSellers = async () => {
-    const allSellers = await api.get.getAllSellers();
-    setSellers(allSellers);
+    const { data } = await api.get.getAllSellers();
+    console.log(data);
+    const filterSellers = data.filter((person) => person.role === 'seller');
+    setSellers(filterSellers);
+  };
+
+  const handleRemove = (id) => {
+    const filterProduct = cartProducts.filter((product) => product.id !== id);
+    localStorage.setItem('carrinho', JSON.stringify([...filterProduct]));
+    setCartProducts(filterProduct);
+    handleTotal(filterProduct);
   };
 
   useEffect(() => {
@@ -23,6 +32,7 @@ export default function CustomerCheckout() {
     handleTotal(storage);
     getAllSellers();
   }, []);
+
   return (
     <div>
       <NavBar />
@@ -82,7 +92,13 @@ export default function CustomerCheckout() {
               <td
                 data-testid={ `customer_checkout__element-order-table-remove-${index}` }
               >
-                <button type="button">Remover</button>
+                <button
+                  onClick={ () => handleRemove(item.id) }
+                  type="button"
+                >
+                  Remover
+
+                </button>
               </td>
             </tr>
           ))}

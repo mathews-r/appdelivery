@@ -46,4 +46,9 @@ const newUser = async (body) => {
   return { name: dataValues.name, email: dataValues.email, password: dataValues.password };
 };
 
-module.exports = { validateLogin, login, newUser };
+const getUsers = async () => {
+  const users = await User.findAll({ attributes: { exclude: 'password' }});
+  return users;
+}
+
+module.exports = { validateLogin, login, newUser, getUsers };

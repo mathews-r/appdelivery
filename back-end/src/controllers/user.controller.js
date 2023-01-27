@@ -14,7 +14,6 @@ const login = async (req, res, next) => {
 const newUser = async (req, res, next) => {
   try {
     const user = await userService.newUser(req.body);
-    // console.log(user);
     return res.status(201).json(user);
   } catch (error) {
     next(error);

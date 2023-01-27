@@ -6,21 +6,8 @@ import api from '../service/request';
 
 export default function UserProvider({ children }) {
   const [userData, setUserData] = useState(null);
-  const [isLogged, setIsLogged] = useState(true);
   const navigate = useNavigate();
-  /*
-  useEffect(() => {
-    async function loadUser() {
-      const storage = localStorage.getItem('user');
 
-      if (storage) {
-        setUserData(JSON.parse(storage));
-      }
-    }
-
-    loadUser();
-  }, []);
-*/
   function storageUser(data) {
     localStorage.setItem('user', JSON.stringify(data));
   }
@@ -29,15 +16,14 @@ export default function UserProvider({ children }) {
     try {
       const { data } = await api.post.login({ email, password });
       setUserData(data);
-      console.log(data);
       storageUser(data);
-      setIsLogged(true);
       navigate('/customer/products');
+      return data;
     } catch (error) {
-      console.log(error);
-      setIsLogged(false);
+      console.log(error.response.data.message);
     }
   };
+
   function logOut() {
     localStorage.removeItem('user');
     setUserData(null);
@@ -45,7 +31,6 @@ export default function UserProvider({ children }) {
   }
 
   const context = useMemo(() => ({
-    isLogged,
     userData,
     signIn,
     logOut,

@@ -9,11 +9,17 @@ function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLogged, setIsLogged] = useState(true);
+  const [errorMsg, setErrorMsg] = useState('');
 
-  const { signIn, isLogged } = useContext(userContext);
+  const { signIn } = useContext(userContext);
 
   const login = async () => {
-    await signIn(email, password);
+    const response = await signIn(email, password);
+    if (response === undefined) {
+      setErrorMsg('Invalid user or password');
+      setIsLogged(false);
+    }
   };
 
   return (
@@ -55,7 +61,7 @@ function Login() {
 
       { !isLogged && (
         <h1 data-testid="common_login__element-invalid-email">
-          INVALID USER OR EMAIL
+          {errorMsg}
         </h1>
       )}
 

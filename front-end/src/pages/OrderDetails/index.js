@@ -3,8 +3,16 @@ import { useParams } from 'react-router-dom';
 import NavBar from '../../components/NavBar';
 
 export default function OrderDetails() {
+  const [orders, setOrders] = useState([]);
   const idVenda = useParams();
-  console.log(idVenda);
+
+  async function getOrders() {
+    const { data } = await api.get.getSalesById(idVenda);
+    setOrders([...data] || []);
+  }
+  useEffect(() => {
+    getOrders();
+  }, []);
   return (
     <section>
       <NavBar />

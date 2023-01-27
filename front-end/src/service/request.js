@@ -26,6 +26,14 @@ const api = {
       const response = await axios.get(`http://localhost:3001/products/${id}`);
       return response;
     },
+    async getSales() {
+      const response = await axios.get('http://localhost:3001/sales/');
+      return response;
+    },
+    async getSaleById(id) {
+      const response = await axios.get(`http://localhost:3001/sales/${id}`);
+      return response;
+    },
   },
 };
 

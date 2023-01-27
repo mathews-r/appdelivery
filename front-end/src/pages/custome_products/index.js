@@ -6,7 +6,6 @@ import api from '../../service/request';
 function CustomerProducts() {
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState();
-  const [localS, setLocalS] = useState(0);
 
   async function loadProducts() {
     await api.get.getAllProducts()
@@ -15,14 +14,16 @@ function CustomerProducts() {
       });
   }
 
-  const getTotal = () => {
-    const localStor = JSON.parse(localStorage.getItem('carrinho'));
-    if (localStor.length) {
-      setLocalS(localStor);
-      const totalPrice = localStor.reduce((acc, curr) => acc + curr.subTotal, 0);
+  const getTotal = (storage) => {
+    if (storage) {
+      const totalPrice = storage.reduce((acc, curr) => acc + curr.subTotal, 0);
       setTotal(totalPrice);
-      console.log(totalPrice);
     }
+    return 0;
+  };
+
+  const handleCard = (storage) => {
+    getTotal(storage);
   };
 
   useEffect(() => {
@@ -30,13 +31,19 @@ function CustomerProducts() {
   }, []);
 
   useEffect(() => {
-    getTotal();
-  }, [localS]);
+    handleCard(JSON.parse(localStorage.getItem('carrinho')));
+  }, []);
 
   return (
     <main>
       <NavBar />
 
+      <button type="button" data-testid="customer_products__button-cart">
+        <p>Ver carrinho: R$</p>
+        <p data-testid="customer_products__checkout-bottom-value">
+          {`${total ? total.toFixed(2).replace('.', ',') : 0}`}
+        </p>
+      </button>
       <section>
         <ul>
           {
@@ -47,12 +54,12 @@ function CustomerProducts() {
                   image={ item.url_image }
                   name={ item.name }
                   price={ item.price.replace('.', ',') }
+                  handleCard={ (e) => handleCard(e) }
                 />
               </li>
             ))
           }
         </ul>
-        <button type="button">{`Ver carrinho: R$ ${total}`}</button>
       </section>
     </main>
   );

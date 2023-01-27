@@ -1,57 +1,97 @@
-import { string, number } from 'prop-types';
+import PropTypes, { string, number } from 'prop-types';
 import { useState, useEffect } from 'react';
 
-export default function ProductCard({ id, name, image, price }) {
+export default function ProductCard({ id, name, image, price, handleCard }) {
   const [quantity, setQuantity] = useState(0);
 
-  const findBeer = (array) => {
-    const beer = array.filter((bebida) => bebida.id !== id);
-    return beer;
+  // const findBeer = (array) => {
+  //   const beer = array.filter((bebida) => bebida.id !== id);
+  //   return beer;
+  // };
+
+  // function changeQuantity({ title }) {
+  //   let value = quantity;
+  //   // setQuantity(0);
+
+  //   if (title.includes('remove') && value > 0) {
+  //     value -= 1;
+
+  //     const localStor = JSON.parse(localStorage.getItem('carrinho'));
+  //     const beer = findBeer(localStor);
+
+  //     const teste = {
+  //       id,
+  //       name,
+  //       quantity: value,
+  //       unitPrice: price,
+  //       subTotal: parseFloat(price.replace(',', '.')) * value,
+  //     };
+  //     localStorage.setItem('carrinho', JSON.stringify([...beer, teste]));
+  //     setQuantity(value);
+  //   }
+
+  //   if (title.includes('remove') && value === 0) {
+  //     const localStor = JSON.parse(localStorage.getItem('carrinho'));
+  //     const beer = findBeer(localStor);
+  //     console.log(beer);
+  //     localStorage.setItem('carrinho', JSON.stringify(beer));
+  //   }
+
+  //   if (title.includes('add')) {
+  //     value += 1;
+  //     const teste = {
+  //       id,
+  //       name,
+  //       quantity: value,
+  //       unitPrice: price,
+  //       subTotal: parseFloat(price.replace(',', '.')) * value,
+  //     };
+  //     const localStor = JSON.parse(localStorage.getItem('carrinho'));
+  //     const beer = findBeer(localStor);
+
+  //     localStorage.setItem('carrinho', JSON.stringify([...beer, teste]));
+  //     setQuantity(value);
+  //   }
+  //   handleCard(JSON.parse(localStorage.getItem('carrinho')));
+  // }
+
+  const updateLocalStorage = (newQuantity) => {
+    const arrCart = JSON.parse(localStorage.getItem('carrinho'));
+    const arrCartPrepared = arrCart.filter((item) => item.id !== id);
+    const newItem = {
+      id,
+      name,
+      quantity: newQuantity,
+      unitPrice: price,
+      subTotal: parseFloat(price.replace(',', '.')) * newQuantity,
+    };
+    localStorage.setItem('carrinho', JSON.stringify([...arrCartPrepared, newItem]));
   };
 
-  function changeQuantity({ title }) {
-    let value = quantity;
+  const increaseQuantity = () => {
+    const newQuantity = quantity + 1;
+    setQuantity(newQuantity);
+    updateLocalStorage(newQuantity);
 
-    if (title.includes('remove') && value > 0) {
-      value -= 1;
+    handleCard(JSON.parse(localStorage.getItem('carrinho')));
+  };
 
-      const localStor = JSON.parse(localStorage.getItem('carrinho'));
-      const beer = findBeer(localStor);
+  const decreaseQuantity = () => {
+    const newQuantity = quantity - 1;
+    if (newQuantity < 0) return setQuantity(0);
+    setQuantity(newQuantity);
+    updateLocalStorage(newQuantity);
 
-      const teste = {
-        id,
-        name,
-        quantity: value,
-        unitPrice: price,
-        subTotal: parseFloat(price.replace(',', '.')) * value,
-      };
-      localStorage.setItem('carrinho', JSON.stringify([...beer, teste]));
-      setQuantity(value);
-    }
+    handleCard(JSON.parse(localStorage.getItem('carrinho')));
+  };
 
-    if (title.includes('remove') && value === 0) {
-      const localStor = JSON.parse(localStorage.getItem('carrinho'));
-      const beer = findBeer(localStor);
-      console.log(beer);
-      localStorage.setItem('carrinho', JSON.stringify(beer));
-    }
+  const inputQuantity = ({ value }) => {
+    if (value < 0) return setQuantity(0);
+    setQuantity(value);
+    updateLocalStorage(value);
 
-    if (title.includes('add')) {
-      value += 1;
-      const teste = {
-        id,
-        name,
-        quantity: value,
-        unitPrice: price,
-        subTotal: parseFloat(price.replace(',', '.')) * value,
-      };
-      const localStor = JSON.parse(localStorage.getItem('carrinho'));
-      const beer = findBeer(localStor);
-
-      localStorage.setItem('carrinho', JSON.stringify([...beer, teste]));
-      setQuantity(value);
-    }
-  }
+    handleCard(JSON.parse(localStorage.getItem('carrinho')));
+  };
 
   useEffect(() => { localStorage.setItem('carrinho', JSON.stringify([])); }, []);
 
@@ -79,7 +119,8 @@ export default function ProductCard({ id, name, image, price }) {
           type="button"
           data-testid={ `customer_products__button-card-rm-item-${id}` }
           title="remove"
-          onClick={ (e) => changeQuantity(e.target) }
+          // onClick={ (e) => changeQuantity(e.target) }
+          onClick={ () => decreaseQuantity() }
         >
           -
         </button>
@@ -87,13 +128,15 @@ export default function ProductCard({ id, name, image, price }) {
           type="text"
           data-testid={ `customer_products__input-card-quantity-${id}` }
           value={ quantity }
-          onChange={ (e) => setQuantity(e.target.value) }
+          title="inputQuantity"
+          onChange={ (e) => inputQuantity(e.target) }
         />
         <button
           type="button"
           data-testid={ `customer_products__button-card-add-item-${id}` }
           title="add"
-          onClick={ (e) => changeQuantity(e.target) }
+          // onClick={ (e) => changeQuantity(e.target) }
+          onClick={ () => increaseQuantity() }
         >
           +
         </button>
@@ -107,4 +150,5 @@ ProductCard.propTypes = {
   name: string.isRequired,
   image: string.isRequired,
   price: string.isRequired,
+  handleCard: PropTypes.func.isRequired,
 };

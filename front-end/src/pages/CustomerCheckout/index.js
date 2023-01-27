@@ -17,7 +17,6 @@ export default function CustomerCheckout() {
 
   const getAllSellers = async () => {
     const { data } = await api.get.getAllUsers();
-    console.log(data);
     const filterSellers = data.filter((person) => person.role === 'seller');
     setSellers(filterSellers);
   };

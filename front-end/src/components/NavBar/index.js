@@ -1,6 +1,10 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { userContext } from '../../context';
 
 export default function NavBar() {
+  const { logOut } = useContext(userContext);
+  const getStorage = JSON.parse(localStorage.getItem('user'));
   return (
     <nav>
       <section>
@@ -22,14 +26,23 @@ export default function NavBar() {
           to="/customer/products"
           data-testid="customer_products__element-navbar-user-full-name"
         >
-          <button type="button">nome do usuario</button>
+          <button
+            type="button"
+          >
+            {getStorage.name}
+          </button>
         </Link>
 
         <Link
           to="/login"
           data-testid="customer_products__element-navbar-link-logout"
         >
-          <button type="button">SAIR</button>
+          <button
+            type="button"
+            onClick={ logOut }
+          >
+            SAIR
+          </button>
         </Link>
       </section>
     </nav>

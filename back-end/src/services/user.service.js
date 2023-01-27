@@ -49,6 +49,6 @@ const newUser = async (body) => {
 const getUsers = async () => {
   const users = await User.findAll();
   return users;
-}
+};
 
 module.exports = { validateLogin, login, newUser, getUsers };

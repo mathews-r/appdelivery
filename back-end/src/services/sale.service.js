@@ -33,6 +33,6 @@ const newSale = async (body) => {
 const getSaleByUser = async (userId) => {
   const sale = await Sale.findOne({ userId });
   return sale;
-}
+};
 
 module.exports = { newSale, getSaleByUser };

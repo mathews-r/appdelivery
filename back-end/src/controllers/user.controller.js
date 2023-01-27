@@ -21,8 +21,12 @@ const newUser = async (req, res, next) => {
 };
 
 const getUsers = async (req, res, next) => {
-  const users = await userService.getUsers();
-  return res.status(200).json(users);
-}
+  try {
+    const users = await userService.getUsers();
+    return res.status(200).json(users);
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = { login, newUser, getUsers };

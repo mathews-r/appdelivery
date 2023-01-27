@@ -9,15 +9,22 @@ const newSale = async (req, res, next) => {
   }
 };
 
-const getSaleByUser = async (req, res, next) => {
+const getAllSalesByUser = async (req, res, next) => {
   const { id } = req.body.user; 
 
   try {
-    const sale = await saleService.getSaleByUser(id);
+    const sale = await saleService.getAllSalesByUser(id);
     return res.status(200).json(sale);
   } catch (error) {
     next(error);
   }
 };
 
-module.exports = { newSale, getSaleByUser };
+const getSaleById = async (req, res, _next) => {
+  const { id } = req.params; 
+
+    const sale = await saleService.getSaleById(id);
+    return res.status(200).json(sale);
+};
+
+module.exports = { newSale, getAllSalesByUser, getSaleById };

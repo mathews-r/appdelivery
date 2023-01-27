@@ -30,9 +30,14 @@ const newSale = async (body) => {
   return sale;
 };
 
-const getSaleByUser = async (userId) => {
-  const sale = await Sale.findOne({ userId });
+const getAllSalesByUser = async (userId) => {
+  const sale = await Sale.findAll({ userId });
   return sale;
 };
 
-module.exports = { newSale, getSaleByUser };
+// const getSaleById = async (saleId) => {
+//   const sale = await SalesProducts.findOne({ saleId }, {attributes: include: []} );
+//   return sale;
+// };
+
+module.exports = { newSale, getAllSalesByUser };

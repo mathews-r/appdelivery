@@ -4,57 +4,6 @@ import { useState, useEffect } from 'react';
 export default function ProductCard({ id, name, image, price, handleCard }) {
   const [quantity, setQuantity] = useState(0);
 
-  // const findBeer = (array) => {
-  //   const beer = array.filter((bebida) => bebida.id !== id);
-  //   return beer;
-  // };
-
-  // function changeQuantity({ title }) {
-  //   let value = quantity;
-  //   // setQuantity(0);
-
-  //   if (title.includes('remove') && value > 0) {
-  //     value -= 1;
-
-  //     const localStor = JSON.parse(localStorage.getItem('carrinho'));
-  //     const beer = findBeer(localStor);
-
-  //     const teste = {
-  //       id,
-  //       name,
-  //       quantity: value,
-  //       unitPrice: price,
-  //       subTotal: parseFloat(price.replace(',', '.')) * value,
-  //     };
-  //     localStorage.setItem('carrinho', JSON.stringify([...beer, teste]));
-  //     setQuantity(value);
-  //   }
-
-  //   if (title.includes('remove') && value === 0) {
-  //     const localStor = JSON.parse(localStorage.getItem('carrinho'));
-  //     const beer = findBeer(localStor);
-  //     console.log(beer);
-  //     localStorage.setItem('carrinho', JSON.stringify(beer));
-  //   }
-
-  //   if (title.includes('add')) {
-  //     value += 1;
-  //     const teste = {
-  //       id,
-  //       name,
-  //       quantity: value,
-  //       unitPrice: price,
-  //       subTotal: parseFloat(price.replace(',', '.')) * value,
-  //     };
-  //     const localStor = JSON.parse(localStorage.getItem('carrinho'));
-  //     const beer = findBeer(localStor);
-
-  //     localStorage.setItem('carrinho', JSON.stringify([...beer, teste]));
-  //     setQuantity(value);
-  //   }
-  //   handleCard(JSON.parse(localStorage.getItem('carrinho')));
-  // }
-
   const updateLocalStorage = (newQuantity) => {
     const arrCart = JSON.parse(localStorage.getItem('carrinho'));
     const arrCartPrepared = arrCart.filter((item) => item.id !== id);
@@ -119,7 +68,6 @@ export default function ProductCard({ id, name, image, price, handleCard }) {
           type="button"
           data-testid={ `customer_products__button-card-rm-item-${id}` }
           title="remove"
-          // onClick={ (e) => changeQuantity(e.target) }
           onClick={ () => decreaseQuantity() }
         >
           -
@@ -135,7 +83,6 @@ export default function ProductCard({ id, name, image, price, handleCard }) {
           type="button"
           data-testid={ `customer_products__button-card-add-item-${id}` }
           title="add"
-          // onClick={ (e) => changeQuantity(e.target) }
           onClick={ () => increaseQuantity() }
         >
           +

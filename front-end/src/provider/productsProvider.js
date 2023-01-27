@@ -5,7 +5,6 @@ import { productsContext } from '../context';
 export default function ProductsProvider({ children }) {
   function getTotal() {
     const totalPrice = localStor.reduce((acc, curr) => acc + curr.subTotal, 0);
-    console.log(totalPrice);
     return totalPrice;
   }
 

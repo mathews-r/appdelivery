@@ -5,6 +5,7 @@ import Register from './pages/Register';
 import CustomerProducts from './pages/custome_products';
 import UserProvider from './provider/index';
 import ProductsProvider from './provider/productsProvider';
+import './style.css';
 
 function App() {
   return (

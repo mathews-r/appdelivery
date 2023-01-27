@@ -3,12 +3,12 @@ import { useParams } from 'react-router-dom';
 import NavBar from '../../components/NavBar';
 
 export default function OrderDetails() {
-  const [orders, setOrders] = useState([]);
   const idVenda = useParams();
+  const [orders, setOrders] = useState({});
 
   async function getOrders() {
     const { data } = await api.get.getSalesById(idVenda);
-    setOrders([...data] || []);
+    setOrders({ ...data });
   }
   useEffect(() => {
     getOrders();
@@ -22,23 +22,26 @@ export default function OrderDetails() {
           <h3
             data-testid="customer_order_details__element-order-details-label-order-id"
           >
-            {idPedido}
+            {orders.id}
           </h3>
           <h3
             data-testid="customer_order_details__element-order-details-label-seller-name"
           >
-            {`P. Vend: ${saler}`}
+            {`P. Vend: ${salerName}`}
           </h3>
           <h3
             data-testid="Group customer_order_details__element-order-details-label-order-date"
           >
-            {date}
+            {orders.saleDate}
 
           </h3>
           <h3
-            data-testid={ `customer_order_details__element-order-details-label-delivery-status${status1}` }
+            data-testid={
+              `customer_order_details__element-order-details-label-delivery-status${
+                orders.status}`
+            }
           >
-            {status1}
+            {orders.status}
 
           </h3>
           <button
@@ -60,44 +63,47 @@ export default function OrderDetails() {
           </tr>
         </thead>
         <tbody>
-          {/* <tr key={ index }>
-              <td
-                data-testid={
-                  `customer_order_details__element-order-table-item-number-${index}`
-                }
-              >
-                {item}
-              </td>
-              <td
-                data-testid={ `customer_order_details__element-order-table-name-${index}` }
-              >
-                {descricao}
+          {
+            orders.products.map((product, index = 1) => (
+              <tr key={ index }>
+                <td
+                  data-testid={
+                    `customer_order_details__element-order-table-item-number-${index}`
+                  }
+                >
+                  {index}
+                </td>
+                <td
+                  data-testid={ `customer_order_details__element-order-table-name-${index}` }
+                >
+                  {product.name}
 
-              </td>
-              <td
-                data-testid={ `customer_order_details__element-order-table-quantity-${index}` }
-              >
-                {quantidade}
+                </td>
+                <td
+                  data-testid={ `customer_order_details__element-order-table-quantity-${index}` }
+                >
+                  {product.quantity}
 
-              </td>
-              <td
-                data-testid={ `customer_order_details__element-order-table-unit-price-${index}` }
-              >
-                {v.unitario}
+                </td>
+                <td
+                  data-testid={ `customer_order_details__element-order-table-unit-price-${index}` }
+                >
+                  {product.unitPrice}
 
-              </td>
-              <td
-                data-testid={ `customer_order_details__element-order-table-sub-total-${index}` }
-              >
-                {sub - total}
-              </td>
-            </tr> */}
+                </td>
+                <td
+                  data-testid={ `customer_order_details__element-order-table-sub-total-${index}` }
+                >
+                  {product.subTotal}
+                </td>
+              </tr>))
+          }
         </tbody>
       </table>
       <h1
         data-testid="customer_order_details__element-order-total-price"
       >
-        {`Total: R$ ${total}`}
+        {`Total: R$ ${orders.totalPrice}`}
 
       </h1>
     </section>

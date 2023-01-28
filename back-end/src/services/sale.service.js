@@ -13,21 +13,22 @@ const totalPrice = async (products) => {
 };
 
 const newSale = async (body) => {
-  const { id } = body.user;
-  const { products } = body;
-
+  const { user, sellerId, deliveryAddress, deliveryNumber, products } = body;
   const sale = await Sale.create({
-    userId: id,
-    sellerId: body.sellerId,
-    deliveryAddress: body.deliveryAddress,
-    deliveryNumber: body.deliveryNumber,
+    userId: user.id,
+    sellerId,
+    deliveryAddress,
+    deliveryNumber,
     totalPrice: await totalPrice(products),
     status: 'Pendente',
   });
 
   await newSaleProduct(sale.id, products);
 
-  return sale;
+  return {
+    id: sale.dataValues.id,
+    ...sale,
+  };
 };
 
 const getAllSalesByUser = async (userId) => {

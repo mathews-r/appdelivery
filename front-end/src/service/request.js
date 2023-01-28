@@ -16,6 +16,15 @@ const api = {
       );
       return response;
     },
+
+    async createSale(authorization, saleData) {
+      const response = await axios.post(
+        'http://localhost:3001/sales',
+        saleData,
+        { headers: { authorization } },
+      );
+      return response;
+    },
   },
   get: {
     async getAllProducts() {
@@ -24,6 +33,10 @@ const api = {
     },
     async getById(id) {
       const response = await axios.get(`http://localhost:3001/products/${id}`);
+      return response;
+    },
+    async getAllUsers() {
+      const response = await axios.get('http://localhost:3001/users');
       return response;
     },
   },

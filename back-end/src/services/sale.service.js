@@ -1,4 +1,4 @@
-const { Sale } = require('../database/models');
+const { User, Sale, Product } = require('../database/models');
 const { getProductById } = require('./product.service');
 const { newSaleProduct } = require('./salesProducts.service');
 
@@ -13,21 +13,41 @@ const totalPrice = async (products) => {
 };
 
 const newSale = async (body) => {
-  const { id } = body.user;
-  const { products } = body;
-
+  const { user, sellerId, deliveryAddress, deliveryNumber, products } = body;
   const sale = await Sale.create({
-    userId: id,
-    sellerId: body.sellerId,
-    deliveryAddress: body.deliveryAddress,
-    deliveryNumber: body.deliveryNumber,
+    userId: user.id,
+    sellerId,
+    deliveryAddress,
+    deliveryNumber,
     totalPrice: await totalPrice(products),
     status: 'Pendente',
   });
 
   await newSaleProduct(sale.id, products);
 
+  return {
+    id: sale.dataValues.id,
+    ...sale,
+  };
+};
+
+const getAllSalesByUser = async (userId) => {
+  const sale = await Sale.findAll({ where: { userId } });
   return sale;
 };
 
-module.exports = { newSale };
+const getSaleById = async (saleId) => {
+  const sale = await Sale.findByPk(saleId, { include: [
+    { model: User, as: 'seller', attributes: ['name'] },
+    { model: Product, as: 'products', attributes: ['id'] },
+  ] });
+
+  if (!sale) {
+    const throwError = { status: 404, message: 'Sale not found' };
+    throw throwError;
+  }
+
+  return sale;
+};
+
+module.exports = { newSale, getAllSalesByUser, getSaleById };

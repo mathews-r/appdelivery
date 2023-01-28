@@ -1,7 +1,7 @@
 import PropTypes, { string, number } from 'prop-types';
 import { useState, useEffect } from 'react';
 
-export default function ProductCard({ id, name, image, price, handleCard }) {
+export default function ProductCard({ id, name, image, price, handleCard, setIsActive }) {
   const [quantity, setQuantity] = useState(0);
 
   const updateLocalStorage = (newQuantity) => {
@@ -21,7 +21,7 @@ export default function ProductCard({ id, name, image, price, handleCard }) {
     const newQuantity = quantity + 1;
     setQuantity(newQuantity);
     updateLocalStorage(newQuantity);
-
+    setIsActive(false);
     handleCard(JSON.parse(localStorage.getItem('carrinho')));
   };
 
@@ -98,4 +98,5 @@ ProductCard.propTypes = {
   image: string.isRequired,
   price: string.isRequired,
   handleCard: PropTypes.func.isRequired,
+  setIsActive: PropTypes.func.isRequired,
 };

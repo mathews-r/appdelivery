@@ -8,6 +8,7 @@ import ProductsProvider from './provider/productsProvider';
 import './style.css';
 import CustomerOrders from './pages/CustomerOrders';
 import OrderDetails from './pages/OrderDetails';
+import CustomerCheckout from './pages/CustomerCheckout';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/login" element={ <Login /> } />
             <Route path="/register" element={ <Register /> } />
             <Route path="/customer/products" element={ <CustomerProducts /> } />
+            <Route path="/customer/checkout" element={ <CustomerCheckout /> } />
             <Route exact path="/customer/orders" element={ <CustomerOrders /> } />
             <Route path="/customer/orders/:id" element={ <OrderDetails /> } />
           </Routes>

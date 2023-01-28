@@ -1,4 +1,4 @@
-const { Sale } = require('../database/models');
+const { User, Sale, Product } = require('../database/models');
 const { getProductById } = require('./product.service');
 const { newSaleProduct } = require('./salesProducts.service');
 
@@ -32,13 +32,22 @@ const newSale = async (body) => {
 };
 
 const getAllSalesByUser = async (userId) => {
-  const sale = await Sale.findAll({ userId });
+  const sale = await Sale.findAll({ where: { userId } });
   return sale;
 };
 
-// const getSaleById = async (saleId) => {
-//   const sale = await SalesProducts.findOne({ saleId }, {attributes: include: []} );
-//   return sale;
-// };
+const getSaleById = async (saleId) => {
+  const sale = await Sale.findByPk(saleId, { include: [
+    { model: User, as: 'seller', attributes: ['name'] },
+    { model: Product, as: 'products', attributes: ['id'] },
+  ] });
 
-module.exports = { newSale, getAllSalesByUser };
+  if (!sale) {
+    const throwError = { status: 404, message: 'Sale not found' };
+    throw throwError;
+  }
+
+  return sale;
+};
+
+module.exports = { newSale, getAllSalesByUser, getSaleById };

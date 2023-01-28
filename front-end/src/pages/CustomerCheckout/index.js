@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import NavBar from '../../components/NavBar';
 import api from '../../service/request';
 
 export default function CustomerCheckout() {
+  const navigate = useNavigate();
   const [cartProducts, setCartProducts] = useState([]);
   const [sellers, setSellers] = useState([]);
   const [address, setAddress] = useState('');
@@ -29,18 +31,16 @@ export default function CustomerCheckout() {
   };
 
   const submitSale = async () => {
-    console.log(select);
-    const { id } = sellers.find((item) => item.name === select);
+    const { id } = sellers.find((item) => item.role === 'seller');
     const newSale = {
       sellerId: id,
       products: cartProducts,
       deliveryAddress: address,
       deliveryNumber: number,
     };
-    await api.post.createSale({
-      newSale,
-    });
-    console.log(newSale);
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    const { data } = await api.post.createSale(token, newSale);
+    navigate(`/customer/orders/${data.id}`);
   };
 
   useEffect(() => {

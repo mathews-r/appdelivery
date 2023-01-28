@@ -10,6 +10,6 @@ routers.use('/login', loginRouter);
 routers.use('/register', userRouter);
 routers.use('/users', userRouter);
 routers.use('/products', productRouter);
-routers.use('/sale', saleRouter);
+routers.use('/sales', saleRouter);
 
 module.exports = routers;

@@ -6,8 +6,6 @@ import api from '../../service/request';
 export default function OrderDetails() {
   const { id: idVenda } = useParams();
   const [orders, setOrders] = useState({ products: [] });
-  const salerName = 'testeq';
-
   async function getOrders() {
     const getStorage = JSON.parse(localStorage.getItem('user'));
     const { data } = await api.get.getSaleById(idVenda, getStorage.token);
@@ -34,7 +32,8 @@ export default function OrderDetails() {
             {`P. Vend: ${orders.seller}`}
           </h3>
           <h3
-            data-testid="Group customer_order_details__element-order-details-label-order-date"
+            data-testid={ 'Group customer_order_details__'
+              + 'element-order-details-label-order-date' }
           >
             {orders.saleDate}
 
@@ -78,25 +77,33 @@ export default function OrderDetails() {
                   {index + 1}
                 </td>
                 <td
-                  data-testid={ `customer_order_details__element-order-table-name-${index}` }
+                  data-testid={
+                    `customer_order_details__element-order-table-name-${index}`
+                  }
                 >
                   {product.name}
 
                 </td>
                 <td
-                  data-testid={ `customer_order_details__element-order-table-quantity-${index}` }
+                  data-testid={
+                    `customer_order_details__element-order-table-quantity-${index}`
+                  }
                 >
                   {product.SalesProducts.quantity}
 
                 </td>
                 <td
-                  data-testid={ `customer_order_details__element-order-table-unit-price-${index}` }
+                  data-testid={
+                    `customer_order_details__element-order-table-unit-price-${index}`
+                  }
                 >
                   {product.price}
 
                 </td>
                 <td
-                  data-testid={ `customer_order_details__element-order-table-sub-total-${index}` }
+                  data-testid={
+                    `customer_order_details__element-order-table-sub-total-${index}`
+                  }
                 >
                   {product.price * product.SalesProducts.quantity}
                 </td>

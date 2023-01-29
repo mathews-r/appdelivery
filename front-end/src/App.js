@@ -22,7 +22,7 @@ function App() {
             <Route path="/customer/products" element={ <CustomerProducts /> } />
             <Route path="/customer/checkout" element={ <CustomerCheckout /> } />
             <Route path="/customer/orders" element={ <CustomerOrders /> } />
-            <Route exact path="/customer/orders/:id" element={ <OrderDetails /> } />
+            <Route path="/customer/orders/:id" element={ <OrderDetails /> } />
           </Routes>
         </ProductsProvider>
       </UserProvider>

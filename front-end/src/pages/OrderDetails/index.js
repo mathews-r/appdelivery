@@ -86,19 +86,19 @@ export default function OrderDetails() {
                 <td
                   data-testid={ `customer_order_details__element-order-table-quantity-${index}` }
                 >
-                  {product.quantity}
+                  {product.SalesProducts.quantity}
 
                 </td>
                 <td
                   data-testid={ `customer_order_details__element-order-table-unit-price-${index}` }
                 >
-                  {product.unitPrice}
+                  {product.price}
 
                 </td>
                 <td
                   data-testid={ `customer_order_details__element-order-table-sub-total-${index}` }
                 >
-                  {product.subTotal}
+                  {product.price * product.SalesProducts.quantity}
                 </td>
               </tr>))
           }

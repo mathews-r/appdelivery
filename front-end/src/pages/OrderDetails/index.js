@@ -105,7 +105,9 @@ export default function OrderDetails() {
                     `customer_order_details__element-order-table-sub-total-${index}`
                   }
                 >
-                  {product.price * product.SalesProducts.quantity}
+                  {(
+                    parseFloat(product.price) * product.SalesProducts.quantity)
+                    .toFixed(2)}
                 </td>
               </tr>))
           }

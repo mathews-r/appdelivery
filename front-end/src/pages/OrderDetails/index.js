@@ -29,7 +29,7 @@ export default function OrderDetails() {
           <h3
             data-testid="customer_order_details__element-order-details-label-seller-name"
           >
-            {`P. Vend: ${orders.seller}`}
+            {`P. Vend: ${orders.seller.name}`}
           </h3>
           <h3
             data-testid={ 'Group customer_order_details__'

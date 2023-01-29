@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import NavBar from '../../components/NavBar';
+import api from '../../service/request';
 
 export default function OrderDetails() {
-  const idVenda = useParams();
-  const [orders, setOrders] = useState({});
+  const { id: idVenda } = useParams();
+  const [orders, setOrders] = useState({ products: [] });
+  const salerName = 'testeq';
 
   async function getOrders() {
-    const { data } = await api.get.getSalesById(idVenda);
+    const getStorage = JSON.parse(localStorage.getItem('user'));
+    const { data } = await api.get.getSaleById(idVenda, getStorage.token);
+    console.log(data);
     setOrders({ ...data });
   }
   useEffect(() => {
@@ -27,7 +31,7 @@ export default function OrderDetails() {
           <h3
             data-testid="customer_order_details__element-order-details-label-seller-name"
           >
-            {`P. Vend: ${salerName}`}
+            {`P. Vend: ${orders.seller}`}
           </h3>
           <h3
             data-testid="Group customer_order_details__element-order-details-label-order-date"
@@ -71,7 +75,7 @@ export default function OrderDetails() {
                     `customer_order_details__element-order-table-item-number-${index}`
                   }
                 >
-                  {index}
+                  {index + 1}
                 </td>
                 <td
                   data-testid={ `customer_order_details__element-order-table-name-${index}` }

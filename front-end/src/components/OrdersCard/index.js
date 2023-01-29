@@ -7,7 +7,7 @@ export default function OrdersCard({ order }) {
   return (
     <section>
       <Link
-        to={ `customer/orders/${id}` }
+        to={ `${id}` }
       >
         <div data-testid={ `customer_orders__element-order-id-${id}` }>
           {

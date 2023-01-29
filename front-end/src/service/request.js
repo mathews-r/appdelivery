@@ -35,12 +35,20 @@ const api = {
       const response = await axios.get(`http://localhost:3001/products/${id}`);
       return response;
     },
-    async getSales() {
-      const response = await axios.get('http://localhost:3001/sales/');
+    async getSales(token) {
+      const response = await axios.get('http://localhost:3001/sales/', {
+        headers: {
+          authorization: `${token}`,
+        },
+      });
       return response;
     },
-    async getSaleById(id) {
-      const response = await axios.get(`http://localhost:3001/sales/${id}`);
+    async getSaleById(id, token) {
+      const response = await axios.get(`http://localhost:3001/sales/${id}`, {
+        headers: {
+          authorization: `${token}`,
+        },
+      });
       return response;
     },
     async getAllUsers() {

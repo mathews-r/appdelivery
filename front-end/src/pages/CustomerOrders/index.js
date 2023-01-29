@@ -7,8 +7,8 @@ export default function CustomerOrders() {
   const [orders, setOrders] = useState([]);
 
   async function getOrders() {
-    // const getStorage = JSON.parse(localStorage.getItem('user'));
-    const { data } = await api.get.getSales();
+    const getStorage = JSON.parse(localStorage.getItem('user'));
+    const { data } = await api.get.getSales(getStorage.token);
     setOrders([...data] || []);
   }
   useEffect(() => {
@@ -18,7 +18,10 @@ export default function CustomerOrders() {
     <div>
       <NavBar />
       {
-        orders.map((order, index) => <OrdersCard key={ index } order={ order } />)
+        orders.map((order, index) => (<OrdersCard
+          key={ index }
+          order={ order }
+        />))
       }
     </div>
   );

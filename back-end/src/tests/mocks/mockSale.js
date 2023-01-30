@@ -19,4 +19,27 @@ const mockSale = {
   status: "Pendente",
 };
 
-module.exports = { mockInputSale, mockSale };
+const mockSalesByUser = [
+  {
+    id: 1,
+    userId: 3,
+    sellerId: 1,
+    totalPrice: "75.00",
+    deliveryAddress: "Rua teste",
+    deliveryNumber: "200",
+    saleDate: "2023-01-28T16:25:45.000Z",
+    status: "Pendente",
+  },
+  {
+    id: 2,
+    userId: 3,
+    sellerId: 1,
+    totalPrice: "75.00",
+    deliveryAddress: "Rua teste 2",
+    deliveryNumber: "10",
+    saleDate: "2023-01-28T16:29:16.000Z",
+    status: "Pendente",
+  },
+];
+
+module.exports = { mockInputSale, mockSale, mockSalesByUser };

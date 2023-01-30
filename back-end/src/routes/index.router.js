@@ -9,8 +9,9 @@ const routers = express.Router();
 
 routers.use('/login', loginRouter);
 routers.use('/register', userRouter);
+routers.use('/users', userRouter);
 routers.use('/products', productRouter);
-routers.use('/sale', saleRouter);
+routers.use('/sales', saleRouter);
 
 routers.use('/seller/orders', ordersRouter);
 

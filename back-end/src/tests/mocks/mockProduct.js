@@ -19,4 +19,4 @@ const mockProducts = [
   },
 ];
 
-module.exports = { mockProducts }
+module.exports = { mockProducts };

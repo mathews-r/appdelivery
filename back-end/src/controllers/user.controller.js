@@ -14,11 +14,15 @@ const login = async (req, res, next) => {
 const newUser = async (req, res, next) => {
   try {
     const user = await userService.newUser(req.body);
-    // console.log(user);
     return res.status(201).json(user);
   } catch (error) {
     next(error);
   }
 };
 
-module.exports = { login, newUser };
+const getUsers = async (req, res, _next) => {
+  const users = await userService.getUsers();
+  return res.status(200).json(users);
+};
+
+module.exports = { login, newUser, getUsers };

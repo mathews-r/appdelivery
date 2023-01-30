@@ -7,14 +7,25 @@ import api from '../../service/request';
 export default function OrderDetails() {
   const { id: idVenda } = useParams();
   const [orders, setOrders] = useState({ products: [] });
+  const [select, setSelect] = useState();
 
   const { seller, totalPrice } = orders;
 
   async function getOrders() {
     const { token } = JSON.parse(localStorage.getItem('user'));
     const { data } = await api.get.getSaleById(idVenda, token);
+    setSelect(data.status);
     setOrders({ ...data });
   }
+
+  const updateStatus = async () => {
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    if (select) {
+      await api.put.updateStatus(token, select, idVenda);
+    }
+  };
+
+  useEffect(() => updateStatus(), [select]);
 
   useEffect(() => {
     getOrders();
@@ -49,13 +60,14 @@ export default function OrderDetails() {
                 orders.status}`
             }
           >
-            {orders.status}
+            {select}
 
           </h3>
           <button
             type="button"
             data-testid="customer_order_details__button-delivery-check"
-            disabled
+            disabled={ select === 'Entregue' }
+            onClick={ () => setSelect('Entregue') }
           >
             MARCAR COMO ENTREGUE
           </button>

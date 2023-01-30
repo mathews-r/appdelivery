@@ -14,7 +14,7 @@ function SaleOrderDetail() {
   async function getOrders() {
     const { token } = JSON.parse(localStorage.getItem('user'));
     const { data } = await api.get.getSaleById(idVenda, token);
-    // setSelect(data.status);
+    setSelect(data.status);
     setOrders({ ...data });
   }
 
@@ -54,18 +54,16 @@ function SaleOrderDetail() {
 
           <div>
             <p
-              data-testid="
-            seller_order_details__element-order-details-label-delivery-status"
+              data-testid="seller_order_details__element-order-details-label-delivery-status"
             >
-              {select}
-
+              {select && (select || 'Pendente')}
             </p>
           </div>
 
           <button
             type="button"
             data-testid="seller_order_details__button-preparing-check"
-            disabled={ select !== 'Preparando' }
+            disabled={ select !== 'Pendente' }
             onClick={ () => setSelect('Preparando') }
           >
             Preparar pedido
@@ -74,7 +72,7 @@ function SaleOrderDetail() {
           <button
             type="button"
             data-testid="seller_order_details__button-dispatch-check"
-            disabled={ select !== 'Em Trânsito' }
+            disabled={ select !== 'Preparando' }
             onClick={ () => setSelect('Em Trânsito') }
           >
             Saiu para entrega

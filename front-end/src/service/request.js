@@ -17,11 +17,11 @@ const api = {
       return response;
     },
 
-    async createSale(authorization, saleData) {
+    async createSale(token, saleData) {
       const response = await axios.post(
         'http://localhost:3001/sales',
         saleData,
-        { headers: { authorization } },
+        { headers: { authorization: token } },
       );
       return response;
     },

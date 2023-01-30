@@ -1,3 +1,4 @@
+import moment from 'moment/moment';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import NavBar from '../../components/NavBar';
@@ -6,13 +7,22 @@ import api from '../../service/request';
 export default function OrderDetails() {
   const { id: idVenda } = useParams();
   const [orders, setOrders] = useState({ products: [] });
-  const { seller } = orders;
+
+  const { seller, totalPrice } = orders;
 
   async function getOrders() {
     const { token } = JSON.parse(localStorage.getItem('user'));
     const { data } = await api.get.getSaleById(idVenda, token);
     setOrders({ ...data });
   }
+
+  // const getDate = (date) => {
+  //   const dateStringToDate = new Date(date);
+  //   const newDate = `${dateStringToDate.getDate()}/${
+  //     dateStringToDate.getMonth() + 1
+  //   }/${dateStringToDate.getFullYear()}`;
+  //   return newDate;
+  // };
 
   useEffect(() => {
     getOrders();
@@ -35,10 +45,10 @@ export default function OrderDetails() {
             {`P. Vend: ${seller && seller.name}`}
           </h3>
           <h3
-            data-testid={ 'Group customer_order_details__'
+            data-testid={ 'customer_order_details__'
               + 'element-order-details-label-order-date' }
           >
-            {orders.saleDate}
+            {moment(orders.saleDate).format('DD/MM/YYYY')}
 
           </h3>
           <h3
@@ -53,6 +63,7 @@ export default function OrderDetails() {
           <button
             type="button"
             data-testid="customer_order_details__button-delivery-check"
+            disabled
           >
             MARCAR COMO ENTREGUE
           </button>
@@ -116,12 +127,16 @@ export default function OrderDetails() {
           }
         </tbody>
       </table>
-      <h1
-        data-testid="customer_order_details__element-order-total-price"
-      >
-        {`Total: R$ ${orders.totalPrice}`}
+      <div>
 
-      </h1>
+        <p>
+          Total: R$
+
+        </p>
+        <p data-testid="customer_order_details__element-order-total-price">
+          {totalPrice && totalPrice.replace('.', ',')}
+        </p>
+      </div>
     </section>
   );
 }

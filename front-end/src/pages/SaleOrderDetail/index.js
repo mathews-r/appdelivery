@@ -54,7 +54,10 @@ function SaleOrderDetail() {
 
           <div>
             <p
-              data-testid="seller_order_details__element-order-details-label-delivery-status"
+              data-testid={
+                'seller_order_details__element-order'
+                + '-details-label-delivery-status'
+              }
             >
               {select && (select || 'Pendente')}
             </p>

@@ -11,7 +11,7 @@ const newSale = async (req, res, next) => {
 
 const getAllSalesByUser = async (req, res, next) => {
   const { id } = req.body.user;
-
+  
   try {
     const sale = await saleService.getAllSalesByUser(id);
     return res.status(200).json(sale);

@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { userContext } from '../../context';
 
@@ -19,8 +19,22 @@ function Login() {
     if (response === undefined) {
       setErrorMsg('Invalid user or password');
       setIsLogged(false);
+    } else {
+      setIsLogged(true);
     }
   };
+
+  const checkLogin = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (isLogged === false) {
+      navigate('/login');
+    } if (isLogged === true && user) {
+      navigate('/customer/products');
+    }
+  };
+
+  useEffect(() => checkLogin(), [isLogged]);
 
   return (
     <form className="form">

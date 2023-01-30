@@ -7,7 +7,6 @@ export default function ProductsProvider({ children }) {
     const totalPrice = localStor.reduce((acc, curr) => acc + curr.subTotal, 0);
     return totalPrice;
   }
-
   const context = useMemo(() => ({
     getTotal,
   }), []);

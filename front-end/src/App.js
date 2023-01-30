@@ -7,6 +7,8 @@ import ProductsProvider from './provider/productsProvider';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import CustomerProducts from './pages/custome_products';
+import CustomerOrders from './pages/CustomerOrders';
+import OrderDetails from './pages/OrderDetails';
 import CustomerCheckout from './pages/CustomerCheckout';
 import SaleOrders from './pages/SaleOrders';
 import SaleOrderDetail from './pages/SaleOrderDetail';
@@ -26,6 +28,8 @@ function App() {
             <Route path="/customer/checkout" element={ <CustomerCheckout /> } />
             <Route path="/seller/orders" element={ <SaleOrders /> } />
             <Route path="/seller/orders/:id" element={ <SaleOrderDetail /> } />
+            <Route path="/customer/orders" element={ <CustomerOrders /> } />
+            <Route path="/customer/orders/:id" element={ <OrderDetails /> } />
           </Routes>
         </ProductsProvider>
       </UserProvider>

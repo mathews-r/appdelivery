@@ -35,8 +35,28 @@ const api = {
       const response = await axios.get(`http://localhost:3001/products/${id}`);
       return response;
     },
+    async getSales(token) {
+      const response = await axios.get('http://localhost:3001/sales/', {
+        headers: {
+          authorization: `${token}`,
+        },
+      });
+      return response;
+    },
+    async getSaleById(id, token) {
+      const response = await axios.get(`http://localhost:3001/sales/${id}`, {
+        headers: {
+          authorization: `${token}`,
+        },
+      });
+      return response;
+    },
     async getAllUsers() {
       const response = await axios.get('http://localhost:3001/users');
+      return response;
+    },
+    async getAllSaleOrders() {
+      const response = await axios.get('http://localhost:3001/seller/orders');
       return response;
     },
   },

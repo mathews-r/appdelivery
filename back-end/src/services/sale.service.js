@@ -39,7 +39,7 @@ const getAllSalesByUser = async (userId) => {
 const getSaleById = async (saleId) => {
   const sale = await Sale.findByPk(saleId, { include: [
     { model: User, as: 'seller', attributes: ['name'] },
-    { model: Product, as: 'products', attributes: ['id'] },
+    { model: Product, as: 'products', attributes: ['id', 'name', 'price'] },
   ] });
 
   if (!sale) {

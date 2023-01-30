@@ -17,7 +17,10 @@ export default function UserProvider({ children }) {
       const { data } = await api.post.login({ email, password });
       setUserData(data);
       storageUser(data);
-      navigate('/customer/products');
+      // navigate('/customer/products');
+      if (data.role === 'customer') navigate('/customer/products');
+      if (data.role === 'seller') navigate('/seller/orders');
+      if (data.role === 'administrator') navigate('/admin/manage');
       return data;
     } catch (error) {
       console.log(error.response.data.message);
@@ -26,8 +29,8 @@ export default function UserProvider({ children }) {
 
   function logOut() {
     localStorage.removeItem('user');
-    setUserData(null);
     navigate('/login');
+    setUserData(null);
   }
 
   const context = useMemo(() => ({

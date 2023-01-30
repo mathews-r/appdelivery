@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { userContext } from '../../context';
 
 import api from '../../service/request';
 
 function SaleOrders() {
+  const navigate = useNavigate();
+
   const [listSaleOrders, setListSaleOrders] = useState([]);
   const { logOut } = useContext(userContext);
   const getStorage = JSON.parse(localStorage.getItem('user'));
@@ -12,6 +14,10 @@ function SaleOrders() {
   const requestApi = async () => {
     const { data } = await api.get.getAllSaleOrders();
     return setListSaleOrders(data);
+  };
+
+  const handleCard = async (request) => {
+    navigate(`/seller/orders/${request.id}`);
   };
 
   useEffect(() => {
@@ -59,6 +65,8 @@ function SaleOrders() {
           listSaleOrders.map((request, index) => (
             <div
               key={ index }
+              onClick={ () => handleCard(request) }
+              role="presentation"
             >
               <p data-testid={ `seller_orders__element-order-id-${request.id}` }>
                 {request.id}

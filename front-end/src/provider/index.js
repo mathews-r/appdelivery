@@ -26,8 +26,8 @@ export default function UserProvider({ children }) {
 
   function logOut() {
     localStorage.removeItem('user');
-    setUserData(null);
     navigate('/login');
+    setUserData(null);
   }
 
   const context = useMemo(() => ({

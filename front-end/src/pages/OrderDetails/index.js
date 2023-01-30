@@ -6,15 +6,18 @@ import api from '../../service/request';
 export default function OrderDetails() {
   const { id: idVenda } = useParams();
   const [orders, setOrders] = useState({ products: [] });
+  const { seller } = orders;
+
   async function getOrders() {
-    const getStorage = JSON.parse(localStorage.getItem('user'));
-    const { data } = await api.get.getSaleById(idVenda, getStorage.token);
-    console.log(data);
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    const { data } = await api.get.getSaleById(idVenda, token);
     setOrders({ ...data });
   }
+
   useEffect(() => {
     getOrders();
   }, []);
+
   return (
     <section>
       <NavBar />
@@ -29,7 +32,7 @@ export default function OrderDetails() {
           <h3
             data-testid="customer_order_details__element-order-details-label-seller-name"
           >
-            {`P. Vend: ${orders.seller.name}`}
+            {`P. Vend: ${seller && seller.name}`}
           </h3>
           <h3
             data-testid={ 'Group customer_order_details__'

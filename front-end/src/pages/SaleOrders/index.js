@@ -1,27 +1,62 @@
+import { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { userContext } from '../../context';
+
+import api from '../../service/request';
+
 function SaleOrders() {
+  const [listSaleOrders, setListSaleOrders] = useState([]);
+  const { logOut } = useContext(userContext);
+  const getStorage = JSON.parse(localStorage.getItem('user'));
+
+  const requestApi = async () => {
+    const { data } = await api.get.getAllSaleOrders();
+    return setListSaleOrders(data);
+  };
+
+  useEffect(() => {
+    requestApi();
+  }, []);
+
   return (
     <>
-      <header>
-        <div data-testid="customer_products__element-navbar-link-orders">
-          <p>Pedidos</p>
-        </div>
-        <div data-testid="customer_products__element-navbar-user-full-name">
-          <p>Nome</p>
-        </div>
-        <div data-testid="customer_products__element-navbar-link-logout">
-          <p>Sair</p>
-        </div>
-      </header>
+      <nav>
+        <section>
+          <Link
+            to="/customer/products"
+            data-testid="customer_products__element-navbar-link-orders"
+          >
+            <button type="button">Pedidos</button>
+          </Link>
+
+          <Link
+            to="/customer/products"
+            data-testid="customer_products__element-navbar-user-full-name"
+          >
+            <button
+              type="button"
+            >
+              {getStorage.name}
+            </button>
+          </Link>
+
+          <Link
+            to="/login"
+            data-testid="customer_products__element-navbar-link-logout"
+          >
+            <button
+              type="button"
+              onClick={ logOut }
+            >
+              SAIR
+            </button>
+          </Link>
+        </section>
+      </nav>
+
       <main>
         {
-          [{
-            delivery_number: 1,
-            id: 2,
-            total_price: 123.12,
-            delivery_address: 'rua x',
-            sale_date: '23/12/2022',
-            status: 'pending',
-          }].map((request, index) => (
+          listSaleOrders.map((request, index) => (
             <div
               key={ index }
             >
@@ -36,13 +71,13 @@ function SaleOrders() {
                 {request.status}
               </p>
               <p data-testid={ `seller_orders__element-order-date-${request.id}` }>
-                {request.sale_date}
+                {request.saleDate}
               </p>
               <p data-testid={ `seller_orders__element-card-price-${request.id}` }>
-                {request.total_price}
+                {request.totalPrice}
               </p>
               <p data-testid={ `seller_orders__element-card-address-${request.id}` }>
-                {request.delivery_address}
+                {request.deliveryAddress}
               </p>
             </div>
           ))

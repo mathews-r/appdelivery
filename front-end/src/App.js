@@ -1,12 +1,17 @@
 import React from 'react';
 import { Routes, Route, Navigate, BrowserRouter } from 'react-router-dom';
+
+import UserProvider from './provider/index';
+import ProductsProvider from './provider/productsProvider';
+
 import Login from './pages/Login';
 import Register from './pages/Register';
 import CustomerProducts from './pages/custome_products';
-import UserProvider from './provider/index';
-import ProductsProvider from './provider/productsProvider';
-import './style.css';
 import CustomerCheckout from './pages/CustomerCheckout';
+import SaleOrders from './pages/SaleOrders';
+import SaleOrderDetail from './pages/SaleOrderDetail';
+
+import './style.css';
 
 function App() {
   return (
@@ -19,6 +24,8 @@ function App() {
             <Route path="/register" element={ <Register /> } />
             <Route path="/customer/products" element={ <CustomerProducts /> } />
             <Route path="/customer/checkout" element={ <CustomerCheckout /> } />
+            <Route path="/seller/orders" element={ <SaleOrders /> } />
+            <Route path="/seller/orders/:id" element={ <SaleOrderDetail /> } />
           </Routes>
         </ProductsProvider>
       </UserProvider>

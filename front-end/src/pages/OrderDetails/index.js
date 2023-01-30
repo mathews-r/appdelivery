@@ -7,7 +7,7 @@ import api from '../../service/request';
 export default function OrderDetails() {
   const { id: idVenda } = useParams();
   const [orders, setOrders] = useState({ products: [] });
-  const [select, setSelect] = useState();
+  const [select, setSelect] = useState('Pendente');
 
   const { seller, totalPrice } = orders;
 

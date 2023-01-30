@@ -25,10 +25,7 @@ const newSale = async (body) => {
 
   await newSaleProduct(sale.id, products);
 
-  return {
-    id: sale.dataValues.id,
-    ...sale,
-  };
+  return sale;
 };
 
 const getAllSalesByUser = async (userId) => {
@@ -50,4 +47,17 @@ const getSaleById = async (saleId) => {
   return sale;
 };
 
-module.exports = { newSale, getAllSalesByUser, getSaleById };
+const updateStatusSale = async (id, status) => {
+  const sale = await getSaleById(id);
+
+  if (!sale) {
+    const throwError = { status: 404, message: 'Sale not found' };
+    throw throwError;
+  }
+
+  const [saleUpdated] = await Sale.update({ status }, { where: { id } });
+
+  return saleUpdated;
+};
+
+module.exports = { newSale, getAllSalesByUser, getSaleById, updateStatusSale };

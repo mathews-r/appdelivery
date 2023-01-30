@@ -16,14 +16,6 @@ export default function OrderDetails() {
     setOrders({ ...data });
   }
 
-  // const getDate = (date) => {
-  //   const dateStringToDate = new Date(date);
-  //   const newDate = `${dateStringToDate.getDate()}/${
-  //     dateStringToDate.getMonth() + 1
-  //   }/${dateStringToDate.getFullYear()}`;
-  //   return newDate;
-  // };
-
   useEffect(() => {
     getOrders();
   }, []);

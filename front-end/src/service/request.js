@@ -60,6 +60,19 @@ const api = {
       return response;
     },
   },
+  put: {
+    async updateStatus(token, status, id) {
+      const response = await axios.put(
+        `http://localhost:3001/sales/${id}`,
+        { status },
+        { headers: {
+          authorization: token,
+        },
+        },
+      );
+      return response;
+    },
+  },
 };
 
 export default api;

@@ -12,7 +12,7 @@ import OrderDetails from './pages/OrderDetails';
 import CustomerCheckout from './pages/CustomerCheckout';
 import SaleOrders from './pages/SaleOrders';
 import SaleOrderDetail from './pages/SaleOrderDetail';
-
+import AdminManage from './pages/Admin';
 import './style.css';
 
 function App() {
@@ -30,6 +30,7 @@ function App() {
             <Route path="/seller/orders/:id" element={ <SaleOrderDetail /> } />
             <Route path="/customer/orders" element={ <CustomerOrders /> } />
             <Route path="/customer/orders/:id" element={ <OrderDetails /> } />
+            <Route path="/admin/manage" element={ <AdminManage /> } />
           </Routes>
         </ProductsProvider>
       </UserProvider>

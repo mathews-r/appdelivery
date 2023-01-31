@@ -82,7 +82,7 @@ function SaleOrderDetail() {
           </button>
         </div>
       </div>
-      <table className="score-board-table">
+      <table>
         <thead>
           <tr>
             <th>item</th>

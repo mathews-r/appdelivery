@@ -46,9 +46,25 @@ const newUser = async (body) => {
   return { name: dataValues.name, email: dataValues.email, password: dataValues.password };
 };
 
+const newAdminUser = async (body) => {
+  const password = md5(body.password);
+
+  const findName = await findUserByName(body.name);
+  const findEmail = await findUserByEmail(body.email);
+
+  if (findName || findEmail) {
+    const throwError = { status: 409, message: 'User already registred' };
+    throw throwError;
+  }
+
+  const { dataValues } = await User.create({ ...body, password, role: body.role });
+
+  return { name: dataValues.name, email: dataValues.email, password: dataValues.password, role: dataValues.role };
+};
+
 const getUsers = async () => {
   const users = await User.findAll({ attributes: { exclude: 'password' } });
   return users;
 };
 
-module.exports = { validateLogin, login, newUser, getUsers };
+module.exports = { validateLogin, login, newUser, getUsers, newAdminUser };

@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { userContext } from '../../context';
 
-export default function NavBar() {
+export default function NavAdmin() {
   const { logOut } = useContext(userContext);
   const getStorage = JSON.parse(localStorage.getItem('user'));
 
@@ -10,29 +10,19 @@ export default function NavBar() {
     <nav>
       <section>
         <Link
-          to="/customer/products"
-          data-testid="customer_products__element-navbar-link-products"
-        >
-          <button type="button">PRODUTOS</button>
-        </Link>
-
-        <Link
-          to="/customer/orders"
+          to="/admin/manage"
           data-testid="customer_products__element-navbar-link-orders"
         >
-          <button type="button">MEUS PEDIDOS</button>
+          <button type="button">Gerenciar Usuários</button>
         </Link>
 
-        <Link
-          to="/customer/products"
+        <h3
           data-testid="customer_products__element-navbar-user-full-name"
         >
-          <button
-            type="button"
-          >
-            {getStorage.name}
-          </button>
-        </Link>
+
+          {getStorage.name}
+
+        </h3>
 
         <Link
           to="/login"

@@ -20,9 +20,18 @@ const newUser = async (req, res, next) => {
   }
 };
 
+const newAdminUser = async (req, res, next) => {
+  try {
+    const user = await userService.newAdminUser(req.body);
+    return res.status(201).json(user);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const getUsers = async (req, res, _next) => {
   const users = await userService.getUsers();
   return res.status(200).json(users);
 };
 
-module.exports = { login, newUser, getUsers };
+module.exports = { login, newUser, getUsers, newAdminUser };

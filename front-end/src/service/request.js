@@ -2,6 +2,14 @@ import axios from 'axios';
 
 const api = {
   post: {
+    async newAdminRegister(userData, token) {
+      const response = await axios.post(
+        'http://localhost:3001/register/admin',
+        userData,
+        { headers: { authorization: token } },
+      );
+      return response;
+    },
     async login(userData) {
       const response = await axios.post(
         'http://localhost:3001/login',

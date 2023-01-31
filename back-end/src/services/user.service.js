@@ -59,7 +59,12 @@ const newAdminUser = async (body) => {
 
   const { dataValues } = await User.create({ ...body, password, role: body.role });
 
-  return { name: dataValues.name, email: dataValues.email, password: dataValues.password, role: dataValues.role };
+  return { 
+    name: dataValues.name, 
+    email: dataValues.email, 
+    password: dataValues.password, 
+    role: dataValues.role 
+  };
 };
 
 const getUsers = async () => {

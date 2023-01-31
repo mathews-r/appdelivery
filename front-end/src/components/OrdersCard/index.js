@@ -25,7 +25,7 @@ export default function OrdersCard({ order }) {
             {moment(saleDate).format('DD/MM/YYYY')}
           </h2>
           <h2 data-testid={ `customer_orders__element-card-price-${id}` }>
-            {totalPrice}
+            {totalPrice.replace('.', ',')}
           </h2>
         </div>
       </Link>

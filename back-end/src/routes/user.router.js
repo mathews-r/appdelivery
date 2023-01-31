@@ -9,5 +9,4 @@ userRouter.post('/admin', tokenValidation, userController.newAdminUser);
 userRouter.post('/', userController.newUser);
 userRouter.get('/', userController.getUsers);
 
-
 module.exports = userRouter;

@@ -12,7 +12,7 @@ const login = async (req, res, next) => {
 };
 
 const deleteUser = async (req, res, _next) => {
-  const { id }= req.params;
+  const { id } = req.params;
   console.log(id);
   await userService.deleteUser(Number(id));
   return res.status(200).end();

@@ -13,6 +13,7 @@ export default function AdminManage() {
   const [isExist, setIsExist] = useState(true);
   const [user, setUser] = useState({});
   const [users, setUsers] = useState([]);
+  const [isDeleted, setIsDeleted] = useState(false);
   const userEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   async function RegisterBtn(e) {
@@ -25,6 +26,11 @@ export default function AdminManage() {
     setUser(newUser.data);
   }
 
+  async function deleteUser(id) {
+    await api.delete.deleteUser(id);
+    setIsDeleted(!isDeleted);
+  }
+
   async function getUsers() {
     const allUsers = await api.get.getAllUsers();
     setUsers(allUsers.data);
@@ -32,7 +38,7 @@ export default function AdminManage() {
 
   useEffect(() => {
     getUsers();
-  }, [user]);
+  }, [user, isDeleted]);
 
   return (
     <div>
@@ -153,6 +159,8 @@ export default function AdminManage() {
                     `admin_manage__element-user-table-remove-${index}`
                   }
                   type="button"
+                  // disabled={ u.id === user.data.id }
+                  onClick={ () => deleteUser(u.id) }
                 >
                   EXCLUIR
                 </button>

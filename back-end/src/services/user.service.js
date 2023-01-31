@@ -67,4 +67,15 @@ const getUsers = async () => {
   return users;
 };
 
-module.exports = { validateLogin, login, newUser, getUsers, newAdminUser };
+const deleteUser = async (id) => {
+  // const user = await User.findByPk({where: {id} })
+
+  /* if (!user) {
+    const throwError = { status: 404, message: 'User not found' };
+    throw throwError;
+  } */
+  console.log(id);
+  await User.destroy({where: {id}});
+}
+
+module.exports = { validateLogin, login, newUser, getUsers, newAdminUser, deleteUser };

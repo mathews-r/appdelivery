@@ -7,7 +7,7 @@ import api from '../../service/request';
 export default function OrderDetails() {
   const { id: idVenda } = useParams();
   const [orders, setOrders] = useState({ products: [] });
-  const [select, setSelect] = useState('Pendente');
+  const [select, setSelect] = useState();
 
   const { seller, totalPrice } = orders;
 
@@ -28,6 +28,7 @@ export default function OrderDetails() {
   useEffect(() => updateStatus(), [select]);
 
   useEffect(() => {
+    console.log(select);
     getOrders();
   }, []);
 
@@ -60,13 +61,13 @@ export default function OrderDetails() {
                 orders.status}`
             }
           >
-            {select}
+            {select && (select || 'Pendente')}
 
           </h3>
           <button
             type="button"
             data-testid="customer_order_details__button-delivery-check"
-            disabled={ select === 'Entregue' }
+            disabled={ select !== 'Em Trânsito' }
             onClick={ () => setSelect('Entregue') }
           >
             MARCAR COMO ENTREGUE

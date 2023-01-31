@@ -1,6 +1,12 @@
 import axios from 'axios';
 
 const api = {
+  delete: {
+    async deleteUser(id) {
+      const response = await axios.delete(`http://localhost:3001/users/admin/${id}`);
+      return response;
+    },
+  },
   post: {
     async newAdminRegister(userData, token) {
       const response = await axios.post(

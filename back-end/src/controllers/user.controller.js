@@ -11,6 +11,13 @@ const login = async (req, res, next) => {
   }
 };
 
+const deleteUser = async (req, res, _next) => {
+  const { id }= req.params;
+  console.log(id);
+  await userService.deleteUser(Number(id));
+  return res.status(200).end();
+};
+
 const newUser = async (req, res, next) => {
   try {
     const user = await userService.newUser(req.body);
@@ -30,8 +37,9 @@ const newAdminUser = async (req, res, next) => {
 };
 
 const getUsers = async (req, res, _next) => {
+  console.log('getUsers');
   const users = await userService.getUsers();
   return res.status(200).json(users);
 };
 
-module.exports = { login, newUser, getUsers, newAdminUser };
+module.exports = { login, newUser, getUsers, newAdminUser, deleteUser };

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import NavAdmin from '../../components/NavBar/NavAdmin';
 import api from '../../service/request';
 
@@ -11,6 +11,8 @@ export default function AdminManage() {
   const MAX_NAME_LENGTH = 12;
   const CONFLICT = 409;
   const [isExist, setIsExist] = useState(true);
+  const [user, setUser] = useState({});
+  const [users, setUsers] = useState([]);
   const userEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   async function RegisterBtn(e) {
@@ -19,8 +21,18 @@ export default function AdminManage() {
     console.log(token);
     const newUser = await api.post
       .newAdminRegister({ name, email, password, role: select }, token);
-    if (newUser.status === CONFLICT) setIsExist(false);
+    if (newUser.status === CONFLICT) return setIsExist(false);
+    setUser(newUser.data);
   }
+
+  async function getUsers() {
+    const allUsers = await api.get.getAllUsers();
+    setUsers(allUsers.data);
+  }
+
+  useEffect(() => {
+    getUsers();
+  }, [user]);
 
   return (
     <div>
@@ -96,6 +108,59 @@ export default function AdminManage() {
 
         </label>
       </form>
+      <table>
+        <thead>
+          <tr>
+            <th>item</th>
+            <th>nome</th>
+            <th>email</th>
+            <th>tipo</th>
+            <th>excluir</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((u, index = 1) => (
+            <tr key={ index }>
+              <td
+                data-testid={
+                  `admin_manage__element-user-table-item-number-${index}`
+                }
+              >
+                {index + 1}
+              </td>
+              <td
+                data-testid={ `admin_manage__element-user-table-name-${index}` }
+              >
+                {u.name}
+              </td>
+              <td
+                data-testid={
+                  `admin_manage__element-user-table-email-${index}`
+                }
+              >
+                {u.email}
+              </td>
+              <td
+                data-testid={
+                  `admin_manage__element-user-table-role-${index}`
+                }
+              >
+                {u.role}
+              </td>
+              <td>
+                <button
+                  data-testid={
+                    `admin_manage__element-user-table-remove-${index}`
+                  }
+                  type="button"
+                >
+                  EXCLUIR
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

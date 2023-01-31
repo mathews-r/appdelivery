@@ -119,7 +119,7 @@ export default function AdminManage() {
           </tr>
         </thead>
         <tbody>
-          {users.map((u, index = 1) => (
+          {users.map((elem, index = 1) => (
             <tr key={ index }>
               <td
                 data-testid={
@@ -131,21 +131,21 @@ export default function AdminManage() {
               <td
                 data-testid={ `admin_manage__element-user-table-name-${index}` }
               >
-                {u.name}
+                {elem.name}
               </td>
               <td
                 data-testid={
                   `admin_manage__element-user-table-email-${index}`
                 }
               >
-                {u.email}
+                {elem.email}
               </td>
               <td
                 data-testid={
                   `admin_manage__element-user-table-role-${index}`
                 }
               >
-                {u.role}
+                {elem.role}
               </td>
               <td>
                 <button

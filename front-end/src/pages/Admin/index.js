@@ -160,7 +160,7 @@ export default function AdminManage() {
                   }
                   type="button"
                   // disabled={ u.id === user.data.id }
-                  onClick={ () => deleteUser(u.id) }
+                  onClick={ () => deleteUser(elem.id) }
                 >
                   EXCLUIR
                 </button>

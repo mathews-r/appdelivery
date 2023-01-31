@@ -14,7 +14,10 @@ export default function AdminManage() {
 
   async function RegisterBtn(e) {
     e.preventDefault();
-    const newUser = await api.post.register({ name, email, password, select });
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    console.log(token);
+    const newUser = await api.post
+      .newAdminRegister({ name, email, password, role: select }, token);
     console.log(newUser);
   }
 

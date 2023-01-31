@@ -11,7 +11,7 @@ const newSale = async (req, res, next) => {
 
 const getAllSalesByUser = async (req, res, next) => {
   const { id } = req.body.user;
-  
+
   try {
     const sale = await saleService.getAllSalesByUser(id);
     return res.status(200).json(sale);
@@ -30,4 +30,16 @@ const getSaleById = async (req, res, next) => {
   }
 };
 
-module.exports = { newSale, getAllSalesByUser, getSaleById };
+const updateSaleStatus = async (req, res, next) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  try {
+    await saleService.updateStatusSale(id, status);
+    return res.status(204).json({ message: 'Sale updated ' });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { newSale, getAllSalesByUser, getSaleById, updateSaleStatus };

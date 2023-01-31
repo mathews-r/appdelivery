@@ -6,7 +6,7 @@ import ProductsProvider from './provider/productsProvider';
 
 import Login from './pages/Login';
 import Register from './pages/Register';
-import CustomerProducts from './pages/custome_products';
+import CustomerProducts from './pages/CustomerProducts';
 import CustomerOrders from './pages/CustomerOrders';
 import OrderDetails from './pages/OrderDetails';
 import CustomerCheckout from './pages/CustomerCheckout';

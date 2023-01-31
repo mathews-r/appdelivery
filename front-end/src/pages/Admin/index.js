@@ -9,7 +9,8 @@ export default function AdminManage() {
   const [select, setSelect] = useState('');
   const MAX_PASSWORD_LENGTH = 6;
   const MAX_NAME_LENGTH = 12;
-  const [isLogged, setIsLogged] = useState(true);
+  const CONFLICT = 409;
+  const [isExist, setIsExist] = useState(true);
   const userEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   async function RegisterBtn(e) {
@@ -18,7 +19,7 @@ export default function AdminManage() {
     console.log(token);
     const newUser = await api.post
       .newAdminRegister({ name, email, password, role: select }, token);
-    console.log(newUser);
+    if (newUser.status === CONFLICT) setIsExist(false);
   }
 
   return (
@@ -87,7 +88,7 @@ export default function AdminManage() {
             Cadastrar
           </button>
 
-          { !isLogged && (
+          { isExist && (
             <h1 data-testid="admin_manage__element-invalid-register">
               Usuário já existe.
             </h1>

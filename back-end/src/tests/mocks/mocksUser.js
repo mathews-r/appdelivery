@@ -8,6 +8,14 @@ const userMock = {
   role: "customer",
 };
 
+const userMockSeller = {
+  id: 1,
+  name: "Fulana",
+  email: "fulana@deliveryapp.com",
+  password: md5('fulana@123'),
+  role: "seller",
+}
+
 const tokenMock = "token";
 
 const userMockWithToken = {
@@ -20,6 +28,11 @@ const userMockWithToken = {
 const userMockInput = {
   email: "zebirita@email.com",
   password: "123456",
+};
+
+const userMockInputSeller = {
+  email: "fulana@deliveryapp.com",
+  password: "fulana@123",
 };
 
 const userMockInputInvalid = {
@@ -48,4 +61,6 @@ module.exports = {
   userMockWithToken,
   userMockInputInvalid,
   mockUsers,
+  userMockSeller,
+  userMockInputSeller,
 };

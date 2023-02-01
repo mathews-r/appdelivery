@@ -48,12 +48,7 @@ const getSaleById = async (saleId) => {
 };
 
 const updateStatusSale = async (id, status) => {
-  const sale = await getSaleById(id);
-
-  if (!sale) {
-    const throwError = { status: 404, message: 'Sale not found' };
-    throw throwError;
-  }
+   await getSaleById(id);
 
   const [saleUpdated] = await Sale.update({ status }, { where: { id } });
 

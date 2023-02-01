@@ -1,3 +1,5 @@
+const md5 = require("md5");
+
 const mockCustomer = [
   {
     name: "Joãozinho",
@@ -11,4 +13,17 @@ const mockCustomer = [
   },
 ];
 
-module.exports = { mockCustomer };
+const mockUserAdmin = [{
+  name: "Fulana",
+  email: "fulana@delivery.com",
+  password: "123456",
+  role: "admin"
+},
+{
+  name: "Fulana",
+  email: "fulana@delivery.com",
+  password: md5("123456"),
+  role: "admin"
+}]
+
+module.exports = { mockCustomer, mockUserAdmin };

@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 
 const app = require("../api/app");
 const { mockSalesByUser } = require("./mocks/mockSale");
-const { userMockInput, userMock } = require("./mocks/mocksUser");
+const { userMockInput, userMock, userMockSeller, userMockInputSeller } = require("./mocks/mocksUser");
 
 describe("Testes na rota /sales", () => {
   describe("Testes com GET", () => {
@@ -44,6 +44,28 @@ describe("Testes na rota /sales", () => {
       expect(response.status).to.be.eq(404);
       expect(response.body.message).to.be.deep.eq('Sale not found');
     });
-    afterEach(() => sinon.restore());
+    
   });
+  describe('Testes com PUT', () => {
+    it('Deve alterar o status da venda com sucesso', async () => {
+      sinon.stub(User, "findOne").resolves(userMockSeller);
+      sinon.stub(Sale, "findAll").resolves(mockSalesByUser);
+
+      const login = await chai.request(app).post("/login").send(userMockInputSeller);
+
+      const response = await chai.request(app).put('/sales/1').set('authorization', login.body.token).send({ status: 'Entregue' });
+      expect(response.status).to.be.eq(204);
+    });
+    it('Deve falhar ao tentar alterar o status da venda que não existe', async () => {
+      sinon.stub(User, "findOne").resolves(userMockSeller);
+      sinon.stub(Sale, "findAll").resolves(undefined);
+
+      const login = await chai.request(app).post("/login").send(userMockInputSeller);
+
+      const response = await chai.request(app).put('/sales/99').set('authorization', login.body.token).send({ status: 'Entregue' });;
+      expect(response.status).to.be.eq(404);
+      expect(response.body.message).to.be.eq('Sale not found');
+    });
+  });
+  afterEach(() => sinon.restore());
 });

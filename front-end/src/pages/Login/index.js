@@ -37,8 +37,10 @@ function Login() {
   useEffect(() => checkLogin(), [isLogged]);
 
   return (
-    <form className="form">
+    <form className="row g-3 align-items-center">
+      <h1>Faça seu login</h1>
       <input
+        className="form-label"
         data-testid="common_login__input-email"
         type="email"
         value={ email }
@@ -47,6 +49,7 @@ function Login() {
       />
 
       <input
+        className="form-label"
         data-testid="common_login__input-password"
         type="password"
         value={ password }
@@ -55,6 +58,7 @@ function Login() {
       />
 
       <button
+        className="btn btn-primary"
         data-testid="common_login__button-login"
         type="button"
         disabled={

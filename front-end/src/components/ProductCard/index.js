@@ -45,26 +45,34 @@ export default function ProductCard({ id, name, image, price, handleCard, setIsA
   useEffect(() => { localStorage.setItem('carrinho', JSON.stringify([])); }, []);
 
   return (
-    <section>
-      <div>
+    <section className="section col">
+      <div className="card">
         <img
+          className="card-img-top"
+          style={ { width: '8rem' } }
           data-testid={ `customer_products__img-card-bg-image-${id}` }
           src={ image }
           alt=""
         />
-        <h2
-          data-testid={ `customer_products__element-card-price-${id}` }
+        <p
+          className="card-text"
+          data-testid={ `customer_products__element-card-title-${id}` }
         >
-          {`R$ ${price}`}
-        </h2>
+          {name}
+        </p>
 
       </div>
-      <h2 data-testid={ `customer_products__element-card-title-${id}` }>
-        {name}
-      </h2>
 
-      <div>
+      <p
+        className="card-text"
+        data-testid={ `customer_products__element-card-price-${id}` }
+      >
+        {`R$ ${price}`}
+      </p>
+
+      <div className="input-group mb-3">
         <button
+          className="btn btn-outline-secondary"
           type="button"
           data-testid={ `customer_products__button-card-rm-item-${id}` }
           title="remove"
@@ -73,6 +81,7 @@ export default function ProductCard({ id, name, image, price, handleCard, setIsA
           -
         </button>
         <input
+          className="form-control2"
           type="text"
           data-testid={ `customer_products__input-card-quantity-${id}` }
           value={ quantity }
@@ -80,6 +89,7 @@ export default function ProductCard({ id, name, image, price, handleCard, setIsA
           onChange={ (e) => inputQuantity(e.target) }
         />
         <button
+          className="btn btn-outline-secondary"
           type="button"
           data-testid={ `customer_products__button-card-add-item-${id}` }
           title="add"

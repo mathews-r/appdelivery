@@ -37,24 +37,13 @@ function CustomerProducts() {
   }, []);
 
   return (
-    <main>
+    <>
       <NavBar />
+      <main className="main">
 
-      <button
-        type="button"
-        data-testid="customer_products__button-cart"
-        disabled={ isActive }
-        onClick={ () => navigate('/customer/checkout') }
-      >
-        <p>Ver carrinho: R$</p>
-        <p data-testid="customer_products__checkout-bottom-value">
-          {`${total ? total.toFixed(2).replace('.', ',') : 0}`}
-        </p>
-      </button>
-      <section>
-        <ul>
+        <div className="container text-center border-warning">
           {products.map((item, index) => (
-            <li key={ index }>
+            <div className="row align-items-center" key={ index }>
               <ProductCard
                 id={ item.id }
                 image={ item.url_image }
@@ -63,11 +52,24 @@ function CustomerProducts() {
                 handleCard={ (e) => handleCard(e) }
                 setIsActive={ () => setIsActive() }
               />
-            </li>
+            </div>
           ))}
-        </ul>
-      </section>
-    </main>
+        </div>
+
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-testid="customer_products__button-cart"
+          disabled={ isActive }
+          onClick={ () => navigate('/customer/checkout') }
+        >
+          <p>Ver carrinho: R$</p>
+          <p data-testid="customer_products__checkout-bottom-value">
+            {`${total ? total.toFixed(2).replace('.', ',') : 0}`}
+          </p>
+        </button>
+      </main>
+    </>
   );
 }
 export default CustomerProducts;

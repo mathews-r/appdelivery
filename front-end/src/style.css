@@ -1,4 +1,54 @@
-img {
-  height: 150px;
-  width: 150px;
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 22rem;
+  gap: 3px;
+  /* border: 1px solid blue; */
 }
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+}
+
+img {
+  height: 140px;
+  width: auto;
+}
+
+.row {
+  width: 30%;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+}
+
+.card {
+  width: 180px;
+}
+
+.form-control2 {
+  text-align: center;
+  width: 100px;
+}
+
+.input-group {
+  justify-content: center;
+}
+
+.card-img-top {
+  align-self: center;
+}
+
+.card-text {
+  text-align: center;
+}
+

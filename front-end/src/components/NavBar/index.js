@@ -7,31 +7,25 @@ export default function NavBar() {
   const getStorage = JSON.parse(localStorage.getItem('user'));
 
   return (
-    <nav>
-      <section>
+    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <section className="container-fluid">
+
+        <p data-testid="customer_products__element-navbar-user-full-name">
+          {getStorage.name}
+        </p>
+
         <Link
           to="/customer/products"
           data-testid="customer_products__element-navbar-link-products"
         >
-          <button type="button">PRODUTOS</button>
+          <button className="navbar-toggler" type="button">PRODUTOS</button>
         </Link>
 
         <Link
           to="/customer/orders"
           data-testid="customer_products__element-navbar-link-orders"
         >
-          <button type="button">MEUS PEDIDOS</button>
-        </Link>
-
-        <Link
-          to="/customer/products"
-          data-testid="customer_products__element-navbar-user-full-name"
-        >
-          <button
-            type="button"
-          >
-            {getStorage.name}
-          </button>
+          <button className="navbar-toggler" type="button">MEUS PEDIDOS</button>
         </Link>
 
         <Link
@@ -39,6 +33,7 @@ export default function NavBar() {
           data-testid="customer_products__element-navbar-link-logout"
         >
           <button
+            className="navbar-toggler"
             type="button"
             onClick={ logOut }
           >

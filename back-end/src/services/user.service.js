@@ -74,7 +74,7 @@ const getUsers = async () => {
 
 const deleteUser = async (id) => {
   await User.destroy({
-    where: { id }
+    where: { id },
   });
 };
 

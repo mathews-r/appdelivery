@@ -28,7 +28,6 @@ export default function OrderDetails() {
   useEffect(() => updateStatus(), [select]);
 
   useEffect(() => {
-    console.log(select);
     getOrders();
   }, []);
 

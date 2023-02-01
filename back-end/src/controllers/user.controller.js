@@ -13,9 +13,8 @@ const login = async (req, res, next) => {
 
 const deleteUser = async (req, res, _next) => {
   const { id } = req.params;
-  console.log(id);
   await userService.deleteUser(Number(id));
-  return res.status(200).end();
+  return res.status(204).end();
 };
 
 const newUser = async (req, res, next) => {
@@ -37,7 +36,6 @@ const newAdminUser = async (req, res, next) => {
 };
 
 const getUsers = async (req, res, _next) => {
-  console.log('getUsers');
   const users = await userService.getUsers();
   return res.status(200).json(users);
 };

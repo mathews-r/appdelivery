@@ -19,7 +19,6 @@ export default function AdminManage() {
   async function RegisterBtn(e) {
     e.preventDefault();
     const { token } = JSON.parse(localStorage.getItem('user'));
-    console.log(token);
     const newUser = await api.post
       .newAdminRegister({ name, email, password, role: select }, token);
     if (newUser.status === CONFLICT) return setIsExist(false);

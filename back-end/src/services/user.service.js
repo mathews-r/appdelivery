@@ -73,7 +73,9 @@ const getUsers = async () => {
 };
 
 const deleteUser = async (id) => {
-  await User.destroy({ where: { id } });
+  await User.destroy({
+    where: { id }
+  });
 };
 
 module.exports = { validateLogin, login, newUser, getUsers, newAdminUser, deleteUser };

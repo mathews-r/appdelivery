@@ -81,7 +81,7 @@ function SaleOrderDetail() {
       <table className="table">
         <thead>
           <tr>
-            <th>item</th>
+            <th>Item</th>
             <th>Description</th>
             <th>Quantity</th>
             <th>Unit Price</th>
@@ -115,6 +115,8 @@ function SaleOrderDetail() {
                   `seller_order_details__element-order-table-unit-price-${index}`
                 }
               >
+                R$
+                {' '}
                 {product.price}
               </td>
               <td
@@ -122,6 +124,8 @@ function SaleOrderDetail() {
                   `seller_order_details__element-order-table-sub-total-${index}`
                 }
               >
+                R$
+                {' '}
                 {(
                   parseFloat(product.price) * product.SalesProducts.quantity
                 ).toFixed(2)}

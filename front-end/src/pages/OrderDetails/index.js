@@ -76,80 +76,79 @@ export default function OrderDetails() {
             {' '}
             {select && (select || 'Pendente')}
           </h5>
-
-          <table className="table">
-            <thead>
-              <tr>
-                <th>item</th>
-                <th>Descrição</th>
-                <th>Quantidade</th>
-                <th>Valor Unitário</th>
-                <th>Sub-total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.products.map((product, index = 1) => (
-                <tr key={ index }>
-                  <td
-                    data-testid={
-                      `customer_order_details__element-order-table-item-number-${index}`
-                    }
-                  >
-                    {index + 1}
-                  </td>
-                  <td
-                    data-testid={
-                      `customer_order_details__element-order-table-name-${index}`
-                    }
-                  >
-                    {product.name}
-                  </td>
-                  <td
-                    data-testid={
-                      `customer_order_details__element-order-table-quantity-${index}`
-                    }
-                  >
-                    {product.SalesProducts.quantity}
-                  </td>
-                  <td
-                    data-testid={
-                      `customer_order_details__element-order-table-unit-price-${index}`
-                    }
-                  >
-                    {product.price}
-                  </td>
-                  <td
-                    data-testid={
-                      `customer_order_details__element-order-table-sub-total-${index}`
-                    }
-                  >
-                    {(
-                      parseFloat(product.price) * product.SalesProducts.quantity
-                    ).toFixed(2)}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <p data-testid="customer_order_details__element-order-total-price">
-            Total Price: R$
-            {' '}
-            {totalPrice && totalPrice.replace('.', ',')}
-          </p>
-
-          <button
-            type="button"
-            className="btn btn-success"
-            data-testid="customer_order_details__button-delivery-check"
-            disabled={ select !== 'Em Trânsito' }
-            onClick={ () => setSelect('Entregue') }
-          >
-            MARK AS DELIVERED
-          </button>
-
         </div>
-
       </div>
+
+      <table className="table">
+        <thead>
+          <tr>
+            <th>item</th>
+            <th>Descrição</th>
+            <th>Quantidade</th>
+            <th>Valor Unitário</th>
+            <th>Sub-total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {orders.products.map((product, index = 1) => (
+            <tr key={ index }>
+              <td
+                data-testid={
+                  `customer_order_details__element-order-table-item-number-${index}`
+                }
+              >
+                {index + 1}
+              </td>
+              <td
+                data-testid={
+                  `customer_order_details__element-order-table-name-${index}`
+                }
+              >
+                {product.name}
+              </td>
+              <td
+                data-testid={
+                  `customer_order_details__element-order-table-quantity-${index}`
+                }
+              >
+                {product.SalesProducts.quantity}
+              </td>
+              <td
+                data-testid={
+                  `customer_order_details__element-order-table-unit-price-${index}`
+                }
+              >
+                {product.price}
+              </td>
+              <td
+                data-testid={
+                  `customer_order_details__element-order-table-sub-total-${index}`
+                }
+              >
+                {(
+                  parseFloat(product.price) * product.SalesProducts.quantity
+                ).toFixed(2)}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p data-testid="customer_order_details__element-order-total-price">
+        Total Price: R$
+        {' '}
+        {totalPrice && totalPrice.replace('.', ',')}
+      </p>
+
+      <button
+        type="button"
+        className="btn btn-success"
+        data-testid="customer_order_details__button-delivery-check"
+        disabled={ select !== 'Em Trânsito' }
+        onClick={ () => setSelect('Entregue') }
+      >
+        MARK AS DELIVERED
+      </button>
+
     </>
   );
 }

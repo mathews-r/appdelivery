@@ -29,7 +29,8 @@ function Login() {
 
     if (isLogged === false) {
       navigate('/login');
-    } if (isLogged === true && user) {
+    }
+    if (isLogged === true && user) {
       navigate('/customer/products');
     }
   };
@@ -37,25 +38,39 @@ function Login() {
   useEffect(() => checkLogin(), [isLogged]);
 
   return (
-    <form className="row g-3 align-items-center">
-      <h1>Faça seu login</h1>
-      <input
-        className="form-label"
-        data-testid="common_login__input-email"
-        type="email"
-        value={ email }
-        onChange={ (e) => setEmail(e.target.value) }
-        placeholder="E-mail"
-      />
+    <form className="row gy-2 gx-3 align-items-center">
 
-      <input
-        className="form-label"
-        data-testid="common_login__input-password"
-        type="password"
-        value={ password }
-        onChange={ (e) => setPassword(e.target.value) }
-        placeholder="Senha"
-      />
+      <h1 className="display-5 text-center">SIGN IN</h1>
+
+      <div className="row mb-3">
+        <label htmlFor="InputEmail" className="form-label">
+          Email
+          <input
+            id="InputEmail"
+            className="form-control"
+            data-testid="common_login__input-email"
+            type="email"
+            value={ email }
+            onChange={ (e) => setEmail(e.target.value) }
+            placeholder="E-mail"
+          />
+        </label>
+      </div>
+
+      <div className="row mb-3">
+        <label htmlFor="InputPassword" className="form-label">
+          Password
+          <input
+            id="InputPassword"
+            className="form-control"
+            data-testid="common_login__input-password"
+            type="password"
+            value={ password }
+            onChange={ (e) => setPassword(e.target.value) }
+            placeholder="Senha"
+          />
+        </label>
+      </div>
 
       <button
         className="btn btn-primary"
@@ -68,21 +83,19 @@ function Login() {
       >
         LOGIN
       </button>
+
       <button
+        className="btn btn-secondary"
         data-testid="common_login__button-register"
         type="button"
         onClick={ () => navigate('/register') }
       >
-        Ainda não tenho conta
-
+        AINDA NÃO TENHO CONTA
       </button>
 
-      { !isLogged && (
-        <h1 data-testid="common_login__element-invalid-email">
-          {errorMsg}
-        </h1>
+      {!isLogged && (
+        <h1 data-testid="common_login__element-invalid-email">{errorMsg}</h1>
       )}
-
     </form>
   );
 }

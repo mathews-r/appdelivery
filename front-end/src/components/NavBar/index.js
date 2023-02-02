@@ -7,40 +7,44 @@ export default function NavBar() {
   const getStorage = JSON.parse(localStorage.getItem('user'));
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
-      <section className="container-fluid">
-
-        <p data-testid="customer_products__element-navbar-user-full-name">
-          {getStorage.name}
-        </p>
-
-        <Link
-          to="/customer/products"
-          data-testid="customer_products__element-navbar-link-products"
-        >
-          <button className="navbar-toggler" type="button">PRODUTOS</button>
-        </Link>
-
-        <Link
-          to="/customer/orders"
-          data-testid="customer_products__element-navbar-link-orders"
-        >
-          <button className="navbar-toggler" type="button">MEUS PEDIDOS</button>
-        </Link>
-
-        <Link
-          to="/login"
-          data-testid="customer_products__element-navbar-link-logout"
-        >
-          <button
-            className="navbar-toggler"
-            type="button"
-            onClick={ logOut }
+    <nav>
+      <ul className="nav">
+        <li className="nav-item">
+          <h5 data-testid="customer_products__element-navbar-user-full-name">
+            {getStorage.name}
+          </h5>
+        </li>
+        <li className="nav-item">
+          <Link
+            to="/customer/products"
+            data-testid="customer_products__element-navbar-link-products"
           >
-            SAIR
-          </button>
-        </Link>
-      </section>
+            <button type="button" className="navbar-toggler" aria-current="page">
+              PRODUCTS
+            </button>
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link
+            to="/customer/orders"
+            data-testid="customer_products__element-navbar-link-orders"
+          >
+            <button type="button" className="navbar-toggler" aria-current="page">
+              ORDERS
+            </button>
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link
+            to="/login"
+            data-testid="customer_products__element-navbar-link-logout"
+          >
+            <button className="navbar-toggler" type="button" onClick={ logOut }>
+              LOGOUT
+            </button>
+          </Link>
+        </li>
+      </ul>
     </nav>
   );
 }

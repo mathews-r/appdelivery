@@ -7,7 +7,7 @@ export default function NavBar() {
   const getStorage = JSON.parse(localStorage.getItem('user'));
 
   return (
-    <nav>
+    <nav className="nav-index">
       <ul className="nav">
         <li className="nav-item">
           <h5 data-testid="customer_products__element-navbar-user-full-name">

@@ -38,11 +38,11 @@ function Login() {
   useEffect(() => checkLogin(), [isLogged]);
 
   return (
-    <form className="row gy-2 gx-3 align-items-center">
+    <form className="row gy-2 gx-3 align-items-center justify-content-center">
 
       <h1 className="display-5 text-center">SIGN IN</h1>
 
-      <div className="row mb-3">
+      <div className="d-flex justify-content-center">
         <label htmlFor="InputEmail" className="form-label">
           Email
           <input
@@ -57,7 +57,7 @@ function Login() {
         </label>
       </div>
 
-      <div className="row mb-3">
+      <div className="d-flex justify-content-center">
         <label htmlFor="InputPassword" className="form-label">
           Password
           <input
@@ -72,27 +72,31 @@ function Login() {
         </label>
       </div>
 
-      <button
-        className="btn btn-primary"
-        data-testid="common_login__button-login"
-        type="button"
-        disabled={
-          !(password.length >= MAX_PASSWORD_LENGTH && userEmail.test(email))
-        }
-        onClick={ login }
-      >
-        LOGIN
-      </button>
+      <div className="d-flex flex-column w-25 gap-3">
+        {/* // className="d-flex justify-content-center align-items-center flex-column" */}
 
-      <button
-        className="btn btn-secondary"
-        data-testid="common_login__button-register"
-        type="button"
-        onClick={ () => navigate('/register') }
-      >
-        AINDA NÃO TENHO CONTA
-      </button>
+        <button
+          className="btn btn-primary"
+          data-testid="common_login__button-login"
+          type="button"
+          disabled={
+            !(password.length >= MAX_PASSWORD_LENGTH && userEmail.test(email))
+          }
+          onClick={ login }
+        >
+          LOGIN
+        </button>
 
+        <button
+          className="btn btn-secondary"
+          data-testid="common_login__button-register"
+          type="button"
+          onClick={ () => navigate('/register') }
+        >
+          AINDA NÃO TENHO CONTA
+        </button>
+
+      </div>
       {!isLogged && (
         <h1 data-testid="common_login__element-invalid-email">{errorMsg}</h1>
       )}

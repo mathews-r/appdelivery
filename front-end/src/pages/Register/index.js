@@ -25,62 +25,69 @@ function Register() {
   };
 
   return (
-    <form className="row gy-2 gx-3 align-items-center">
+    <form className="row gy-2 gx-3 align-items-center justify-content-center">
       <h1 className="display-5 text-center">SIGN UP</h1>
-      <label htmlFor="id" className="form-label">
-        Name
-        <input
-          id="name"
-          data-testid="common_register__input-name"
-          className="form-control"
-          type="email"
-          value={ name }
-          onChange={ (e) => setName(e.target.value) }
-          placeholder="Seu Nome"
-        />
-      </label>
 
-      <label htmlFor="email" className="form-label">
-        Email
+      <div className="d-flex justify-content-center flex-column align-items-center">
 
-        <input
-          id="email"
-          data-testid="common_register__input-email"
-          className="form-control"
-          type="email"
-          value={ email }
-          onChange={ (e) => setEmail(e.target.value) }
-          placeholder="E-mail"
-        />
-      </label>
+        <label htmlFor="id" className="form-label">
+          Name
+          <input
+            id="name"
+            data-testid="common_register__input-name"
+            className="form-control"
+            type="email"
+            value={ name }
+            onChange={ (e) => setName(e.target.value) }
+            placeholder="Seu Nome"
+          />
+        </label>
 
-      <label htmlFor="password" className="form-label">
-        Password
+        <label htmlFor="email" className="form-label">
+          Email
 
-        <input
-          id="password"
-          data-testid="common_register__input-password"
-          className="form-control"
-          type="password"
-          value={ password }
-          onChange={ (e) => setPassword(e.target.value) }
-          placeholder="*******"
-        />
-      </label>
+          <input
+            id="email"
+            data-testid="common_register__input-email"
+            className="form-control"
+            type="email"
+            value={ email }
+            onChange={ (e) => setEmail(e.target.value) }
+            placeholder="E-mail"
+          />
+        </label>
 
-      <button
-        className="btn btn-primary"
-        data-testid="common_register__button-register"
-        type="button"
-        disabled={
-          !(password.length >= MAX_PASSWORD_LENGTH
+        <label htmlFor="password" className="form-label">
+          Password
+
+          <input
+            id="password"
+            data-testid="common_register__input-password"
+            className="form-control"
+            type="password"
+            value={ password }
+            onChange={ (e) => setPassword(e.target.value) }
+            placeholder="*******"
+          />
+        </label>
+      </div>
+
+      <div className="d-flex flex-column w-25 gap-3">
+
+        <button
+          className="btn btn-primary"
+          data-testid="common_register__button-register"
+          type="button"
+          disabled={
+            !(password.length >= MAX_PASSWORD_LENGTH
             && userEmail.test(email)
             && name.length >= MAX_NAME_LENGTH)
-        }
-        onClick={ () => register() }
-      >
-        CADASTRAR
-      </button>
+          }
+          onClick={ () => register() }
+        >
+          CADASTRAR
+        </button>
+      </div>
 
       { !isLogged && (
         <h1 data-testid="common_register__element-invalid_register">

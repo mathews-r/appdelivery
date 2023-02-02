@@ -3,3 +3,16 @@
   height: 5rem;
   justify-content: space-around;
 }
+
+.nav-index {
+  background-color: #333333;
+  color: #ffca00;
+}
+
+.navbar-toggler {
+  color: #ffca00;
+}
+
+.form-control {
+  width: 24vw;
+}

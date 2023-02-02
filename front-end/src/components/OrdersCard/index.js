@@ -1,43 +1,63 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import PropTypes, { string, number } from 'prop-types';
 import moment from 'moment';
 
 export default function OrdersCard({ order }) {
+  const navigate = useNavigate();
   const { saleDate, id, totalPrice, status: orderStatus } = order;
   return (
-    <section>
-      <Link
-        to={ `${id}` }
-      >
-        <div data-testid={ `customer_orders__element-order-id-${id}` }>
-          {
-            `Pedido ${id}`
-          }
-        </div>
+    <section className="card text-center mb-3" style={ { width: '18rem' } }>
+      <div className="card-body">
 
-        <div data-testid={ `customer_orders__element-delivery-status-${id}` }>
+        <h5
+          className="card-title"
+          data-testid={ `customer_orders__element-delivery-status-${id}` }
+        >
+          Status:
+          {' '}
           {orderStatus}
-        </div>
+        </h5>
 
-        <div>
-          <h2 data-testid={ `customer_orders__element-order-date-${id}` }>
-            {moment(saleDate).format('DD/MM/YYYY')}
-          </h2>
-          <h2 data-testid={ `customer_orders__element-card-price-${id}` }>
-            {totalPrice.replace('.', ',')}
-          </h2>
-        </div>
-      </Link>
+        <p
+          className="card-text"
+          data-testid={ `customer_orders__element-order-date-${id}` }
+        >
+          Date:
+          {' '}
+          {moment(saleDate).format('DD/MM/YYYY')}
+        </p>
+
+        <p
+          className="card-text"
+          data-testid={ `customer_orders__element-card-price-${id}` }
+        >
+          Total Price: R$
+          {' '}
+          {totalPrice.replace('.', ',')}
+        </p>
+
+        <button
+          className="btn btn-primary"
+          type="button"
+          data-testid={ `customer_orders__element-order-id-${id}` }
+          onClick={ () => navigate(`/customer/orders/${id}`) }
+        >
+          {`Order ${id}`}
+
+        </button>
+
+      </div>
     </section>
   );
 }
 
-OrdersCard.propTypes = ({
+OrdersCard.propTypes = {
   order: PropTypes.shape({
     saleDate: string,
     id: number,
     totalPrice: string,
     orderStatus: string,
   }),
-}).isRequired;
+}.isRequired;

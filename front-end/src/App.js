@@ -13,7 +13,7 @@ import CustomerCheckout from './pages/CustomerCheckout';
 import SaleOrders from './pages/SaleOrders';
 import SaleOrderDetail from './pages/SaleOrderDetail';
 import AdminManage from './pages/Admin';
-import './style.css';
+import './styles/styles.css';
 
 function App() {
   return (

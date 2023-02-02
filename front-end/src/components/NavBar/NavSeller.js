@@ -8,34 +8,41 @@ export default function NavSeller() {
 
   return (
     <nav>
-      <section>
-        <Link
-          to="/seller/orders"
-          data-testid="customer_products__element-navbar-link-orders"
-        >
-          <button type="button">Pedidos</button>
-        </Link>
-
-        <h2
-          data-testid="customer_products__element-navbar-user-full-name"
-        >
-
-          {getStorage.name}
-
-        </h2>
-
-        <Link
-          to="/login"
-          data-testid="customer_products__element-navbar-link-logout"
-        >
-          <button
-            type="button"
-            onClick={ logOut }
+      <ul className="nav">
+        <li className="nav-item">
+          <h5
+            data-testid="customer_products__element-navbar-user-full-name"
           >
-            SAIR
-          </button>
-        </Link>
-      </section>
+
+            {getStorage.name}
+
+          </h5>
+        </li>
+
+        <li className="nav-item">
+          <Link
+            to="/seller/orders"
+            data-testid="customer_products__element-navbar-link-orders"
+          >
+            <button className="navbar-toggler" type="button">Pedidos</button>
+          </Link>
+        </li>
+
+        <li className="nav-item">
+          <Link
+            to="/login"
+            data-testid="customer_products__element-navbar-link-logout"
+          >
+            <button
+              className="navbar-toggler"
+              type="button"
+              onClick={ logOut }
+            >
+              SAIR
+            </button>
+          </Link>
+        </li>
+      </ul>
     </nav>
   );
 }

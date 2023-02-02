@@ -18,14 +18,13 @@ export default function SaleOrders() {
   return (
     <>
       <NavSeller />
-      <div>
-        {
-          listSaleOrders.map((order, index) => (<SaleOrdersCard
-            key={ index }
-            order={ order }
-          />))
-        }
-      </div>
+      {
+        listSaleOrders.map((order, index) => (<SaleOrdersCard
+          key={ index }
+          order={ order }
+        />))
+      }
+
     </>
   );
 }

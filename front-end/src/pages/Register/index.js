@@ -25,31 +25,51 @@ function Register() {
   };
 
   return (
-    <form className="form">
-      <input
-        data-testid="common_register__input-name"
-        type="email"
-        value={ name }
-        onChange={ (e) => setName(e.target.value) }
-        placeholder="Seu Nome"
-      />
-      <input
-        data-testid="common_register__input-email"
-        type="email"
-        value={ email }
-        onChange={ (e) => setEmail(e.target.value) }
-        placeholder="E-mail"
-      />
+    <form className="row gy-2 gx-3 align-items-center">
+      <h1 className="display-5 text-center">SIGN UP</h1>
+      <label htmlFor="id" className="form-label">
+        Name
+        <input
+          id="name"
+          data-testid="common_register__input-name"
+          className="form-control"
+          type="email"
+          value={ name }
+          onChange={ (e) => setName(e.target.value) }
+          placeholder="Seu Nome"
+        />
+      </label>
 
-      <input
-        data-testid="common_register__input-password"
-        type="password"
-        value={ password }
-        onChange={ (e) => setPassword(e.target.value) }
-        placeholder="*******"
-      />
+      <label htmlFor="email" className="form-label">
+        Email
+
+        <input
+          id="email"
+          data-testid="common_register__input-email"
+          className="form-control"
+          type="email"
+          value={ email }
+          onChange={ (e) => setEmail(e.target.value) }
+          placeholder="E-mail"
+        />
+      </label>
+
+      <label htmlFor="password" className="form-label">
+        Password
+
+        <input
+          id="password"
+          data-testid="common_register__input-password"
+          className="form-control"
+          type="password"
+          value={ password }
+          onChange={ (e) => setPassword(e.target.value) }
+          placeholder="*******"
+        />
+      </label>
 
       <button
+        className="btn btn-primary"
         data-testid="common_register__button-register"
         type="button"
         disabled={

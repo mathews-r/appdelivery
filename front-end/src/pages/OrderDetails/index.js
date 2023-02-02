@@ -32,7 +32,7 @@ export default function OrderDetails() {
   }, []);
 
   return (
-    <section>
+    <>
       <NavBar />
       <h2 className="text-center">Order Details</h2>
 
@@ -150,6 +150,6 @@ export default function OrderDetails() {
         </div>
 
       </div>
-    </section>
+    </>
   );
 }

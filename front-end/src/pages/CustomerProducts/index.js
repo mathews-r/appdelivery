@@ -39,11 +39,27 @@ function CustomerProducts() {
   return (
     <>
       <NavBar />
-      <main className="main">
+      <main>
+        <div className="input-group mb-3 justify-content-center">
 
-        <div className="container text-center border-warning">
+          <button
+            className="btn btn-outline-secondary"
+            type="button"
+            data-testid="customer_products__button-cart"
+            disabled={ isActive }
+            onClick={ () => navigate('/customer/checkout') }
+          >
+            <p data-testid="customer_products__checkout-bottom-value">
+              Ver carrinho: R$
+              {total ? total.toFixed(2).replace('.', ',') : 0}
+
+            </p>
+          </button>
+        </div>
+
+        <div className="row row-cols-1 row-cols-md-3 g-4">
           {products.map((item, index) => (
-            <div className="row align-items-center" key={ index }>
+            <div className="col" key={ index }>
               <ProductCard
                 id={ item.id }
                 image={ item.url_image }
@@ -56,18 +72,6 @@ function CustomerProducts() {
           ))}
         </div>
 
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-testid="customer_products__button-cart"
-          disabled={ isActive }
-          onClick={ () => navigate('/customer/checkout') }
-        >
-          <p>Ver carrinho: R$</p>
-          <p data-testid="customer_products__checkout-bottom-value">
-            {`${total ? total.toFixed(2).replace('.', ',') : 0}`}
-          </p>
-        </button>
       </main>
     </>
   );

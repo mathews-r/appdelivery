@@ -1,7 +1,14 @@
 import PropTypes, { string, number } from 'prop-types';
 import { useState, useEffect } from 'react';
 
-export default function ProductCard({ id, name, image, price, handleCard, setIsActive }) {
+export default function ProductCard({
+  id,
+  name,
+  image,
+  price,
+  handleCard,
+  setIsActive,
+}) {
   const [quantity, setQuantity] = useState(0);
 
   const updateLocalStorage = (newQuantity) => {
@@ -14,7 +21,10 @@ export default function ProductCard({ id, name, image, price, handleCard, setIsA
       unitPrice: price,
       subTotal: parseFloat(price.replace(',', '.')) * newQuantity,
     };
-    localStorage.setItem('carrinho', JSON.stringify([...arrCartPrepared, newItem]));
+    localStorage.setItem(
+      'carrinho',
+      JSON.stringify([...arrCartPrepared, newItem]),
+    );
   };
 
   const increaseQuantity = () => {
@@ -42,63 +52,71 @@ export default function ProductCard({ id, name, image, price, handleCard, setIsA
     handleCard(JSON.parse(localStorage.getItem('carrinho')));
   };
 
-  useEffect(() => { localStorage.setItem('carrinho', JSON.stringify([])); }, []);
+  useEffect(() => {
+    localStorage.setItem('carrinho', JSON.stringify([]));
+  }, []);
 
   return (
-    <section className="section col">
-      <div className="card">
-        <img
-          className="card-img-top"
-          style={ { width: '8rem' } }
-          data-testid={ `customer_products__img-card-bg-image-${id}` }
-          src={ image }
-          alt=""
-        />
-        <p
-          className="card-text"
+
+    <div className="card align-items-center">
+      <img
+        className="card-img-top"
+        style={ { width: '8rem' } }
+        data-testid={ `customer_products__img-card-bg-image-${id}` }
+        src={ image }
+        alt=""
+      />
+
+      <div className="card-body">
+        <h5
+          className="card-title text-center"
           data-testid={ `customer_products__element-card-title-${id}` }
         >
           {name}
+        </h5>
+
+        <p
+          className="card-text text-center"
+          data-testid={ `customer_products__element-card-price-${id}` }
+        >
+          {`R$ ${price}`}
         </p>
 
-      </div>
+        <div className="input-group mb-3">
+          <button
+            className="btn btn-outline-secondary"
+            type="button"
+            data-testid={ `customer_products__button-card-rm-item-${id}` }
+            title="remove"
+            onClick={ () => decreaseQuantity() }
+          >
+            -
+          </button>
 
-      <p
-        className="card-text"
-        data-testid={ `customer_products__element-card-price-${id}` }
-      >
-        {`R$ ${price}`}
-      </p>
+          <input
+            className="form-control text-center"
+            type="text"
+            data-testid={ `customer_products__input-card-quantity-${id}` }
+            value={ quantity }
+            title="inputQuantity"
+            onChange={ (e) => inputQuantity(e.target) }
+          />
 
-      <div className="input-group mb-3">
-        <button
-          className="btn btn-outline-secondary"
-          type="button"
-          data-testid={ `customer_products__button-card-rm-item-${id}` }
-          title="remove"
-          onClick={ () => decreaseQuantity() }
-        >
-          -
-        </button>
-        <input
-          className="form-control2"
-          type="text"
-          data-testid={ `customer_products__input-card-quantity-${id}` }
-          value={ quantity }
-          title="inputQuantity"
-          onChange={ (e) => inputQuantity(e.target) }
-        />
-        <button
-          className="btn btn-outline-secondary"
-          type="button"
-          data-testid={ `customer_products__button-card-add-item-${id}` }
-          title="add"
-          onClick={ () => increaseQuantity() }
-        >
-          +
-        </button>
+          <button
+            className="btn btn-outline-secondary"
+            type="button"
+            data-testid={ `customer_products__button-card-add-item-${id}` }
+            title="add"
+            onClick={ () => increaseQuantity() }
+          >
+            +
+          </button>
+
+        </div>
+
       </div>
-    </section>
+    </div>
+
   );
 }
 

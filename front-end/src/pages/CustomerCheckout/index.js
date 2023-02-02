@@ -137,22 +137,26 @@ export default function CustomerCheckout() {
 
       <form className="form d-flex justify-content-center flex-column align-items-center">
 
-        <select
-          className="form-select-sm"
-          aria-label="Default select example"
-          data-testid="customer_checkout__select-seller"
-          value={ select }
-          onChange={ (e) => setSelect(e.target.value) }
-        >
-          Seller:
+        <div className="d-flex">
+          <select
+            className="form-select"
+            aria-label="Default select example"
+            data-testid="customer_checkout__select-seller"
+            value={ select }
+            onChange={ (e) => setSelect(e.target.value) }
+          >
 
-          {sellers.map((item, index) => (
-            <option key={ index } id="seller">
+            {sellers.map((item, index) => (
+              <option key={ index } id="seller">
 
-              {item.name}
-            </option>
-          ))}
-        </select>
+                Seller:
+                {' '}
+                {item.name}
+              </option>
+            ))}
+          </select>
+
+        </div>
 
         <div>
           <label className="form-label" htmlFor="address">

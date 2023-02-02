@@ -58,14 +58,15 @@ export default function ProductCard({
 
   return (
 
-    <div className="card align-items-center">
-      <img
-        className="card-img-top"
-        style={ { width: '8rem' } }
-        data-testid={ `customer_products__img-card-bg-image-${id}` }
-        src={ image }
-        alt=""
-      />
+    <div className="div-card-product card align-items-center p-3">
+      <div className="bg-image hover-overlay hover-zoom hover-shadow ripple">
+        <img
+          className="card-img-top"
+          data-testid={ `customer_products__img-card-bg-image-${id}` }
+          src={ image }
+          alt=""
+        />
+      </div>
 
       <div className="card-body">
         <h5

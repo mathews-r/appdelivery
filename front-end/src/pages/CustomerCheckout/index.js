@@ -51,11 +51,11 @@ export default function CustomerCheckout() {
   }, []);
 
   return (
-    <>
+    <section style={ { backgroundColor: '#FAFAFA', minHeight: '100vh' } }>
       <NavBar />
 
-      <table className="table">
-        <thead>
+      <table className="table table-sm table-hover table-responsive">
+        <thead className="text-center">
           <tr>
             <th>Item</th>
             <th>Description</th>
@@ -65,7 +65,7 @@ export default function CustomerCheckout() {
             <th>Remove Item</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="text-center">
           {cartProducts && cartProducts.map((item, index) => (
             <tr key={ item.id }>
               <td
@@ -127,12 +127,22 @@ export default function CustomerCheckout() {
         </tbody>
       </table>
 
-      <div>
-        <p data-testid="customer_checkout__element-order-total-price">
-          Total: R$
-          {total}
-        </p>
+      <div className="input-group mb-3 justify-content-center pt-4">
+        <div
+          className="btn text-dark bg-warning mb-3"
+          type="button"
+          data-testid="customer_products__button-cart"
+        >
+          <p
+            className="mb-0"
+            data-testid="customer_checkout__element-order-total-price"
+          >
+            Total: R$
+            {total}
+          </p>
+        </div>
       </div>
+
       <h2 className="text-center">Details and Address to Delivery</h2>
 
       <form className="form d-flex justify-content-center flex-column align-items-center">
@@ -197,6 +207,6 @@ export default function CustomerCheckout() {
         </button>
 
       </form>
-    </>
+    </section>
   );
 }

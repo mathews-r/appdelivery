@@ -34,7 +34,7 @@ export default function OrderDetails() {
   return (
     <>
       <NavBar />
-      <h2 className="text-center">Order Details</h2>
+      <h2 className="text-center py-4">Order Details</h2>
 
       <div className="card border-warning mb-3">
 
@@ -133,21 +133,31 @@ export default function OrderDetails() {
           ))}
         </tbody>
       </table>
-      <p data-testid="customer_order_details__element-order-total-price">
-        Total Price: R$
-        {' '}
-        {totalPrice && totalPrice.replace('.', ',')}
-      </p>
 
-      <button
-        type="button"
-        className="btn btn-success"
-        data-testid="customer_order_details__button-delivery-check"
-        disabled={ select !== 'Em Trânsito' }
-        onClick={ () => setSelect('Entregue') }
-      >
-        MARK AS DELIVERED
-      </button>
+      <div className="input-group mb-3 justify-content-center pt-4 gap-3">
+        <div
+          className="btn text-dark bg-warning"
+          data-testid="customer_products__button-cart"
+        >
+          <p
+            className="mb-0"
+            data-testid="customer_order_details__element-order-total-price"
+          >
+            Total Price: R$
+            {' '}
+            {totalPrice && totalPrice.replace('.', ',')}
+          </p>
+        </div>
+        <button
+          type="button"
+          className="btn btn-success"
+          data-testid="customer_order_details__button-delivery-check"
+          disabled={ select !== 'Em Trânsito' }
+          onClick={ () => setSelect('Entregue') }
+        >
+          MARK AS DELIVERED
+        </button>
+      </div>
 
     </>
   );

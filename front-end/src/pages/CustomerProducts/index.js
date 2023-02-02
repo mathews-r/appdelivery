@@ -39,17 +39,20 @@ function CustomerProducts() {
   return (
     <>
       <NavBar />
-      <main className="main-products">
+      <main className="main-products pt-4">
         <div className="input-group mb-3 justify-content-center">
 
           <button
-            className="btn text-dark bg-warning"
+            className="btn text-dark bg-warning mb-3"
             type="button"
             data-testid="customer_products__button-cart"
             disabled={ isActive }
             onClick={ () => navigate('/customer/checkout') }
           >
-            <p data-testid="customer_products__checkout-bottom-value">
+            <p
+              data-testid="customer_products__checkout-bottom-value"
+              className="mb-0"
+            >
               Ver carrinho: R$
               {total ? total.toFixed(2).replace('.', ',') : 0}
 

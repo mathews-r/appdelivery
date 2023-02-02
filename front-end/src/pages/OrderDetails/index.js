@@ -80,11 +80,11 @@ export default function OrderDetails() {
           <table className="table">
             <thead>
               <tr>
-                <th scope="col">item</th>
-                <th scope="col">Descrição</th>
-                <th scope="col">Quantidade</th>
-                <th scope="col">Valor Unitário</th>
-                <th scope="col">Sub-total</th>
+                <th>item</th>
+                <th>Descrição</th>
+                <th>Quantidade</th>
+                <th>Valor Unitário</th>
+                <th>Sub-total</th>
               </tr>
             </thead>
             <tbody>

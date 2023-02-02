@@ -54,15 +54,15 @@ export default function CustomerCheckout() {
     <div>
       <NavBar />
 
-      <table>
+      <table className="table">
         <thead>
           <tr>
             <th>Item</th>
-            <th>Descrição</th>
-            <th>Quantidade</th>
-            <th>Valor unitário</th>
-            <th>Sub-total</th>
-            <th>Remover Item</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Sub Total</th>
+            <th>Remove Item</th>
           </tr>
         </thead>
         <tbody>
@@ -95,6 +95,8 @@ export default function CustomerCheckout() {
                   `customer_checkout__element-order-table-unit-price-${index}`
                 }
               >
+                R$
+                {' '}
                 {item.unitPrice}
               </td>
 
@@ -103,6 +105,8 @@ export default function CustomerCheckout() {
                   `customer_checkout__element-order-table-sub-total-${index}`
                 }
               >
+                R$
+                {' '}
                 {item.subTotal.toFixed(2).replace('.', ',')}
               </td>
 
@@ -110,10 +114,11 @@ export default function CustomerCheckout() {
                 data-testid={ `customer_checkout__element-order-table-remove-${index}` }
               >
                 <button
+                  className="btn btn-warning"
                   onClick={ () => handleRemove(item.id) }
                   type="button"
                 >
-                  Remover
+                  Remove
 
                 </button>
               </td>
@@ -121,57 +126,75 @@ export default function CustomerCheckout() {
           ))}
         </tbody>
       </table>
+
       <div>
-        <p>Total:</p>
         <p data-testid="customer_checkout__element-order-total-price">
+          Total: R$
           {total}
         </p>
       </div>
       <div>
-        <h2>Detalhes e endereço para a entrega</h2>
-        <select
-          data-testid="customer_checkout__select-seller"
-          value={ select }
-          onChange={ (e) => setSelect(e.target.value) }
+        <h2>Details and Address to Delivery</h2>
 
-        >
-          {sellers.map((item, index) => (
-            <option key={ index }>
-              {item.name}
-            </option>
-          ))}
-        </select>
+        <form className="form">
 
-        <label htmlFor="address">
-          Endereço
-          <input
-            data-testid="customer_checkout__input-address"
-            type="text"
-            id="address"
-            value={ address }
-            onChange={ (e) => setAddress(e.target.value) }
-          />
-        </label>
+          <select
+            className="form-select-sm"
+            aria-label="Default select example"
+            data-testid="customer_checkout__select-seller"
+            value={ select }
+            onChange={ (e) => setSelect(e.target.value) }
+          >
+            {sellers.map((item, index) => (
+              <option key={ index }>
+                Seller:
+                {' '}
+                {item.name}
+              </option>
+            ))}
+          </select>
 
-        <label htmlFor="number">
-          Numero
-          <input
-            data-testid="customer_checkout__input-address-number"
-            type="number"
-            id="number"
-            value={ number }
-            onChange={ (e) => setNumber(e.target.value) }
-          />
-        </label>
+          <div>
 
-        <button
-          data-testid="customer_checkout__button-submit-order"
-          type="button"
-          onClick={ () => submitSale() }
-        >
-          Finalizar Pedido
+            <label className="form-label" htmlFor="address">
+              Delivery Address
+              <input
+                className="form-control"
+                data-testid="customer_checkout__input-address"
+                type="text"
+                id="address"
+                value={ address }
+                onChange={ (e) => setAddress(e.target.value) }
+              />
+            </label>
+          </div>
 
-        </button>
+          <div>
+
+            <label className="form-label" htmlFor="number">
+              Delivery Number
+              <input
+                className="form-control"
+                data-testid="customer_checkout__input-address-number"
+                type="number"
+                id="number"
+                value={ number }
+                onChange={ (e) => setNumber(e.target.value) }
+              />
+            </label>
+          </div>
+
+          <button
+            className="btn btn-success"
+            data-testid="customer_checkout__button-submit-order"
+            type="button"
+            onClick={ () => submitSale() }
+          >
+            Finish Order
+
+          </button>
+
+        </form>
       </div>
     </div>
   );

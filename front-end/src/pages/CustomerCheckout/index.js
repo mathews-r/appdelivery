@@ -114,7 +114,7 @@ export default function CustomerCheckout() {
                 data-testid={ `customer_checkout__element-order-table-remove-${index}` }
               >
                 <button
-                  className="btn btn-warning"
+                  className="btn btn-danger"
                   onClick={ () => handleRemove(item.id) }
                   type="button"
                 >
@@ -133,9 +133,9 @@ export default function CustomerCheckout() {
           {total}
         </p>
       </div>
-      <h2>Details and Address to Delivery</h2>
+      <h2 className="text-center">Details and Address to Delivery</h2>
 
-      <form className="form">
+      <form className="form d-flex justify-content-center flex-column align-items-center">
 
         <select
           className="form-select-sm"
@@ -144,10 +144,11 @@ export default function CustomerCheckout() {
           value={ select }
           onChange={ (e) => setSelect(e.target.value) }
         >
+          Seller:
+
           {sellers.map((item, index) => (
-            <option key={ index }>
-              Seller:
-              {' '}
+            <option key={ index } id="seller">
+
               {item.name}
             </option>
           ))}

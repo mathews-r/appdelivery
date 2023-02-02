@@ -39,11 +39,11 @@ function CustomerProducts() {
   return (
     <>
       <NavBar />
-      <main>
+      <main className="main-products">
         <div className="input-group mb-3 justify-content-center">
 
           <button
-            className="btn btn-outline-secondary"
+            className="btn text-dark bg-warning"
             type="button"
             data-testid="customer_products__button-cart"
             disabled={ isActive }

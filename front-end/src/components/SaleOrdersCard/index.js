@@ -7,7 +7,10 @@ export default function SaleOrdersCard({ order }) {
   const { saleDate, id, totalPrice, status: orderStatus, deliveryAddress } = order;
   return (
     <section className="card text-center mb-3" style={ { width: '18rem' } }>
-      <div className="card-body">
+      <div
+        className="card-body"
+        style={ { backgroundColor: orderStatus === 'Entregue' ? '#157347' : '#FFC107' } }
+      >
         <h5
           className="card-title"
           data-testid={ `seller_orders__element-delivery-status-${id}` }

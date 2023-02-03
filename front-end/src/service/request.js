@@ -2,8 +2,8 @@ import axios from 'axios';
 
 const api = {
   delete: {
-    async deleteUser(id) {
-      const response = await axios.delete(`http://localhost:3001/users/admin/${id}`);
+    async deleteUser(id, authorization) {
+      const response = await axios.delete(`http://localhost:3001/users/admin/${id}`, { headers: { authorization } });
       return response;
     },
   },

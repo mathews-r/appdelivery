@@ -80,7 +80,7 @@ export default function OrderDetails() {
       </div>
 
       <table className="table">
-        <thead>
+        <thead className="text-center">
           <tr>
             <th>item</th>
             <th>Descrição</th>
@@ -89,7 +89,7 @@ export default function OrderDetails() {
             <th>Sub-total</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="text-center">
           {orders.products.map((product, index = 1) => (
             <tr key={ index }>
               <td
@@ -118,6 +118,8 @@ export default function OrderDetails() {
                   `customer_order_details__element-order-table-unit-price-${index}`
                 }
               >
+                R$
+                {' '}
                 {product.price}
               </td>
               <td
@@ -125,6 +127,8 @@ export default function OrderDetails() {
                   `customer_order_details__element-order-table-sub-total-${index}`
                 }
               >
+                R$
+                {' '}
                 {(
                   parseFloat(product.price) * product.SalesProducts.quantity
                 ).toFixed(2)}

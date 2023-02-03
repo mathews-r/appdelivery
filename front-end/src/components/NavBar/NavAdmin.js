@@ -7,35 +7,42 @@ export default function NavAdmin() {
   const getStorage = JSON.parse(localStorage.getItem('user'));
 
   return (
-    <nav>
-      <section>
-        <Link
-          to="/admin/manage"
-          data-testid="customer_products__element-navbar-link-orders"
-        >
-          <button type="button">Gerenciar Usuários</button>
-        </Link>
-
-        <h3
-          data-testid="customer_products__element-navbar-user-full-name"
-        >
-
-          {getStorage.name}
-
-        </h3>
-
-        <Link
-          to="/login"
-          data-testid="customer_products__element-navbar-link-logout"
-        >
-          <button
-            type="button"
-            onClick={ logOut }
+    <nav className="nav-index">
+      <ul className="nav">
+        <li className="nav-item">
+          <h5
+            data-testid="customer_products__element-navbar-user-full-name"
           >
-            SAIR
-          </button>
-        </Link>
-      </section>
+
+            {getStorage.name}
+
+          </h5>
+        </li>
+        <li className="nav-item">
+          <Link
+            to="/admin/manage"
+            data-testid="customer_products__element-navbar-link-orders"
+          >
+            <button className="navbar-toggler" type="button">MANAGE USERS</button>
+          </Link>
+        </li>
+
+        <li className="nav-item">
+          <Link
+            to="/login"
+            data-testid="customer_products__element-navbar-link-logout"
+          >
+            <button
+              className="navbar-toggler"
+              type="button"
+              onClick={ logOut }
+            >
+              LOGOUT
+            </button>
+          </Link>
+        </li>
+
+      </ul>
     </nav>
   );
 }

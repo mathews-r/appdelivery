@@ -7,7 +7,7 @@ export default function NavSeller() {
   const getStorage = JSON.parse(localStorage.getItem('user'));
 
   return (
-    <nav>
+    <nav className="nav-index">
       <ul className="nav">
         <li className="nav-item">
           <h5
@@ -24,7 +24,7 @@ export default function NavSeller() {
             to="/seller/orders"
             data-testid="customer_products__element-navbar-link-orders"
           >
-            <button className="navbar-toggler" type="button">Pedidos</button>
+            <button className="navbar-toggler" type="button">ORDERS</button>
           </Link>
         </li>
 
@@ -38,7 +38,7 @@ export default function NavSeller() {
               type="button"
               onClick={ logOut }
             >
-              SAIR
+              LOGOUT
             </button>
           </Link>
         </li>

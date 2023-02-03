@@ -1,7 +1,7 @@
 export default function CustomerCheckout() {
   return (
     <table className="table w-50">
-      <thead>
+      <thead className="text-center">
         <tr>
           <th>Item</th>
           <th>Description</th>
@@ -11,7 +11,7 @@ export default function CustomerCheckout() {
           <th>Remove Item</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className="text-center">
         {cartProducts && cartProducts.map((item, index) => (
           <tr key={ item.id }>
             <td

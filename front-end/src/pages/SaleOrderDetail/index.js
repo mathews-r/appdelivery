@@ -34,7 +34,7 @@ function SaleOrderDetail() {
   return (
     <>
       <NavSeller />
-      <h2 className="text-center">Order Details</h2>
+      <h2 className="text-center py-4">Order Details</h2>
       <div className="card border-warning mb-3">
         <div className="card-header">
           <h4 data-testid="seller_order_details__element-order-details-label-order-id">
@@ -51,7 +51,7 @@ function SaleOrderDetail() {
           >
             Seller:
             {' '}
-            {`P. Vend: ${seller && seller.name}`}
+            {seller && seller.name}
           </h5>
           <h5
             data-testid={
@@ -79,7 +79,7 @@ function SaleOrderDetail() {
       </div>
 
       <table className="table">
-        <thead>
+        <thead className="text-center">
           <tr>
             <th>Item</th>
             <th>Description</th>
@@ -88,7 +88,7 @@ function SaleOrderDetail() {
             <th>Sub-Total</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="text-center">
           {orders.products.map((product, index = 1) => (
             <tr key={ index }>
               <td
@@ -134,31 +134,40 @@ function SaleOrderDetail() {
           ))}
         </tbody>
       </table>
-      <div>
-        <p data-testid="seller_order_details__element-order-total-price">
-          Total Price: R$
-          {totalPrice && totalPrice.replace('.', ',')}
-        </p>
-      </div>
-      <button
-        type="button"
-        className="btn btn-warning"
-        data-testid="seller_order_details__button-preparing-check"
-        disabled={ select !== 'Pendente' }
-        onClick={ () => setSelect('Preparando') }
-      >
-        Preparar pedido
-      </button>
+      <div className="input-group mb-3 justify-content-center pt-4 gap-3">
+        <div
+          className="btn text-dark bg-warning"
+          data-testid="customer_products__button-cart"
+        >
 
-      <button
-        className="btn btn-success"
-        type="button"
-        data-testid="seller_order_details__button-dispatch-check"
-        disabled={ select !== 'Preparando' }
-        onClick={ () => setSelect('Em Trânsito') }
-      >
-        Saiu para entrega
-      </button>
+          <p
+            className="mb-0"
+            data-testid="seller_order_details__element-order-total-price"
+          >
+            Total Price: R$
+            {totalPrice && totalPrice.replace('.', ',')}
+          </p>
+        </div>
+        <button
+          type="button"
+          className="btn btn-warning"
+          data-testid="seller_order_details__button-preparing-check"
+          disabled={ select !== 'Pendente' }
+          onClick={ () => setSelect('Preparando') }
+        >
+          Preparar pedido
+        </button>
+
+        <button
+          className="btn btn-success"
+          type="button"
+          data-testid="seller_order_details__button-dispatch-check"
+          disabled={ select !== 'Preparando' }
+          onClick={ () => setSelect('Em Trânsito') }
+        >
+          Saiu para entrega
+        </button>
+      </div>
     </>
   );
 }

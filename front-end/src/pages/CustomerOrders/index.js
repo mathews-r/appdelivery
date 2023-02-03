@@ -17,12 +17,14 @@ export default function CustomerOrders() {
   return (
     <div>
       <NavBar />
-      {
-        orders.map((order, index) => (<OrdersCard
-          key={ index }
-          order={ order }
-        />))
-      }
+      <div className="d-flex flex-wrap card-group-w-60 justify-content-center gap-3 m-10">
+        {
+          orders.map((order, index) => (<OrdersCard
+            key={ index }
+            order={ order }
+          />))
+        }
+      </div>
     </div>
   );
 }

@@ -18,12 +18,14 @@ export default function SaleOrders() {
   return (
     <>
       <NavSeller />
-      {
-        listSaleOrders.map((order, index) => (<SaleOrdersCard
-          key={ index }
-          order={ order }
-        />))
-      }
+      <div className="d-flex flex-wrap card-group-w-60 justify-content-center gap-3 w-80">
+        {
+          listSaleOrders.map((order, index) => (<SaleOrdersCard
+            key={ index }
+            order={ order }
+          />))
+        }
+      </div>
 
     </>
   );

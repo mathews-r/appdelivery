@@ -3,14 +3,14 @@ import NavAdmin from '../../components/NavBar/NavAdmin';
 import api from '../../service/request';
 
 export default function AdminManage() {
+  const MAX_PASSWORD_LENGTH = 6;
+  const MAX_NAME_LENGTH = 12;
   const [name, setName] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [select, setSelect] = useState('');
-  const MAX_PASSWORD_LENGTH = 6;
-  const MAX_NAME_LENGTH = 12;
-  const CONFLICT = 409;
-  const [isExist, setIsExist] = useState(true);
+  const [isExist, setIsExist] = useState(false);
   const [user, setUser] = useState({});
   const [users, setUsers] = useState([]);
   const [isDeleted, setIsDeleted] = useState(false);
@@ -19,14 +19,19 @@ export default function AdminManage() {
   async function RegisterBtn(e) {
     e.preventDefault();
     const { token } = JSON.parse(localStorage.getItem('user'));
-    const newUser = await api.post
-      .newAdminRegister({ name, email, password, role: select }, token);
-    if (newUser.status === CONFLICT) return setIsExist(false);
-    setUser(newUser.data);
+    try {
+      const newUser = await api.post
+        .newAdminRegister({ name, email, password, role: select }, token);
+      setUser(newUser.data);
+    } catch (error) {
+      setErrorMsg(error.response.data.message);
+      setIsExist(true);
+    }
   }
 
   async function deleteUser(id) {
-    await api.delete.deleteUser(id);
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    await api.delete.deleteUser(id, token);
     setIsDeleted(!isDeleted);
   }
 
@@ -40,59 +45,75 @@ export default function AdminManage() {
   }, [user, isDeleted]);
 
   return (
-    <div>
-      <header>
-        <NavAdmin />
-      </header>
+    <div style={ { backgroundColor: '#FAFAFA' } }>
+      <NavAdmin />
 
-      <form className="container" onSubmit={ RegisterBtn }>
-        <label htmlFor="name-input">
-          Nome
-          <input
-            name="name-input"
-            value={ name }
-            onChange={ (e) => setName(e.target.value) }
-            data-testid="admin_manage__input-name"
-          />
-        </label>
+      <form
+        className="form justify-content-around"
+        onSubmit={ RegisterBtn }
+      >
+        <div className="d-flex justify-content-center">
 
-        <label htmlFor="email-input">
-          Email
-          <input
-            type="email"
-            name="email-input"
-            value={ email }
-            onChange={ (e) => setEmail(e.target.value) }
-            data-testid="admin_manage__input-email"
-          />
-        </label>
+          <label className="form-label" htmlFor="name-input">
+            Nome
+            <input
+              className="form-control"
+              id="name-input"
+              value={ name }
+              onChange={ (e) => setName(e.target.value) }
+              data-testid="admin_manage__input-name"
+            />
+          </label>
+        </div>
 
-        <label htmlFor="password-input">
-          Password
-          <br />
-          <input
-            type="password"
-            id="password-input"
-            name="password-input"
-            value={ password }
-            onChange={ (e) => setPassword(e.target.value) }
-            data-testid="admin_manage__input-password"
-          />
+        <div className="d-flex justify-content-center">
+          <label className="form-label" htmlFor="email-input">
+            Email
+            <input
+              className="form-control"
+              type="email"
+              id="email-input"
+              value={ email }
+              onChange={ (e) => setEmail(e.target.value) }
+              data-testid="admin_manage__input-email"
+            />
+          </label>
+        </div>
 
+        <div className="d-flex justify-content-center">
+          <label className="form-label" htmlFor="password-input">
+            Password
+            <input
+              className="form-control"
+              type="password"
+              id="password-input"
+              value={ password }
+              onChange={ (e) => setPassword(e.target.value) }
+              data-testid="admin_manage__input-password"
+            />
+          </label>
+        </div>
+
+        <div className="d-flex align-items-center justify-content-center">
           <select
+            id="select"
+            className="form-select-w-70"
             name="role-input"
             type="role"
             value={ select }
             onChange={ (e) => setSelect(e.target.value) }
             data-testid="admin_manage__select-role"
           >
-            <option value="Default">-------</option>
-            <option value="seller">Vendedor</option>
-            <option value="customer">Cliente</option>
-            <option value="administrator">Administrador</option>
+            <option value="seller">Seller</option>
+            <option value="customer">Customer</option>
+            <option value="administrator">Administrator</option>
           </select>
 
+        </div>
+
+        <div className="d-flex flex-column-w-90 gap-3 justify-content-center">
           <button
+            className="btn btn-primary"
             type="submit"
             data-testid="admin_manage__button-register"
             disabled={
@@ -104,26 +125,27 @@ export default function AdminManage() {
           >
             Cadastrar
           </button>
+        </div>
 
-          { isExist && (
-            <h1 data-testid="admin_manage__element-invalid-register">
-              Usuário já existe.
-            </h1>
-          )}
+        { isExist && (
+          <h1 data-testid="admin_manage__element-invalid-register">
+            {errorMsg}
+          </h1>
+        )}
 
-        </label>
       </form>
-      <table>
-        <thead>
+
+      <table className="table">
+        <thead className="text-center">
           <tr>
-            <th>item</th>
-            <th>nome</th>
-            <th>email</th>
-            <th>tipo</th>
-            <th>excluir</th>
+            <th>Item</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Delete</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="text-center">
           {users.map((elem, index = 1) => (
             <tr key={ index }>
               <td
@@ -154,14 +176,14 @@ export default function AdminManage() {
               </td>
               <td>
                 <button
+                  className="btn btn-danger"
                   data-testid={
                     `admin_manage__element-user-table-remove-${index}`
                   }
                   type="button"
-                  // disabled={ u.id === user.data.id }
                   onClick={ () => deleteUser(elem.id) }
                 >
-                  EXCLUIR
+                  REMOVE
                 </button>
               </td>
             </tr>

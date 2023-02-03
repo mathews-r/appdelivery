@@ -5,8 +5,8 @@
 }
 
 .nav-index {
-  background-color: #333333;
-  color: #ffca00;
+  background-color: rgba(51, 51, 51, 0.2);
+  color: rgb(255, 202, 0);
 }
 
 .navbar-toggler {
@@ -18,10 +18,10 @@
 }
 
 .table, .form, .main-products {
-  background-color: #FAFAFA;
+  background-color: rgb(250, 250, 250);
 }
 
 .div-card-product:hover {
-  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+  box-shadow: 0 10px 20px rgba(0, 0, 0,.12), 0 4px 8px rgba(0, 0, 0, .06);
   transform: scale(1.03);
 }

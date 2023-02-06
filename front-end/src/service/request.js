@@ -1,5 +1,5 @@
-import 'dotenv/config';
 import axios from 'axios';
+import 'dotenv/config';
 
 const api = {
   delete: {

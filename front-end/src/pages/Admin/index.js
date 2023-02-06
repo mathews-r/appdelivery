@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import NavAdmin from '../../components/NavBar/NavAdmin';
-import api from '../../service/request';
+import api from '../../services/request';
 
 export default function AdminManage() {
   const MAX_PASSWORD_LENGTH = 6;

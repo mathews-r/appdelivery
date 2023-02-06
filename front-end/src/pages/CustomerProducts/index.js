@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../../components/NavBar';
 import ProductCard from '../../components/ProductCard';
-import api from '../../service/request';
+import api from '../../services/request';
 
 function CustomerProducts() {
   const navigate = useNavigate();

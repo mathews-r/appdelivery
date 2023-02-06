@@ -1,7 +1,7 @@
 import moment from 'moment/moment';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import api from '../../service/request';
+import api from '../../services/request';
 import NavSeller from '../../components/NavBar/NavSeller';
 
 function SaleOrderDetail() {

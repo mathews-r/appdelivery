@@ -2,7 +2,7 @@ import { node } from 'prop-types';
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { userContext } from '../context';
-import api from '../service/request';
+import api from '../services/request';
 
 export default function UserProvider({ children }) {
   const [userData, setUserData] = useState(null);

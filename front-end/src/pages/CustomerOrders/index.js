@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from '../../components/NavBar';
 import OrdersCard from '../../components/OrdersCard';
-import api from '../../service/request';
+import api from '../../services/request';
 
 export default function CustomerOrders() {
   const [orders, setOrders] = useState([]);

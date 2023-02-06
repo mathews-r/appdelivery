@@ -27,47 +27,51 @@ function Register() {
   return (
     <section
       style={ { minHeight: '100vh', backgroundColor: '#fafafa' } }
-      className="d-flex align-items-center justify-content-center"
+      className="d-flex align-items-center justify-content-center d-flex flex-column"
     >
-      <form className="row gy-2 gx-3 align-items-center justify-content-center">
-        <h1 className="display-5 text-center">SIGN UP</h1>
+      <h1 className="display-5 text-center">SIGN UP</h1>
+      <form className="d-flex gap-3 flex-column">
 
-        <div className="d-flex justify-content-center flex-column align-items-center">
+        <div className="form-group">
 
           <label htmlFor="id" className="form-label">
             Name
             <input
               id="name"
               data-testid="common_register__input-name"
-              className="form-control"
+              className="form-control w-100"
               type="email"
               value={ name }
               onChange={ (e) => setName(e.target.value) }
               placeholder="Seu Nome"
             />
           </label>
+        </div>
 
+        <div className="form-group">
           <label htmlFor="email" className="form-label">
             Email
 
             <input
               id="email"
               data-testid="common_register__input-email"
-              className="form-control"
+              className="form-control w-100"
               type="email"
               value={ email }
               onChange={ (e) => setEmail(e.target.value) }
               placeholder="E-mail"
             />
           </label>
+        </div>
 
+        <div className="form-group">
           <label htmlFor="password" className="form-label">
             Password
 
             <input
               id="password"
               data-testid="common_register__input-password"
-              className="form-control"
+              className="form-control w-100"
               type="password"
               value={ password }
               onChange={ (e) => setPassword(e.target.value) }
@@ -76,10 +80,10 @@ function Register() {
           </label>
         </div>
 
-        <div className="d-flex flex-column w-25 gap-3">
+        <div className="form-group">
 
           <button
-            className="btn btn-primary"
+            className="btn btn-primary w-100"
             data-testid="common_register__button-register"
             type="button"
             disabled={

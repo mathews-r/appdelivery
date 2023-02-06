@@ -145,9 +145,9 @@ export default function CustomerCheckout() {
 
       <h2 className="text-center">Details and Address to Delivery</h2>
 
-      <form className="form d-flex justify-content-center flex-column align-items-center">
+      <form className="d-flex gap-3 flex-column">
 
-        <div className="d-flex">
+        <div className="form-group">
           <select
             className="form-select"
             aria-label="Default select example"
@@ -168,13 +168,13 @@ export default function CustomerCheckout() {
 
         </div>
 
-        <div>
-          <label className="form-label" htmlFor="address">
+        <div className="form-group">
+          <label htmlFor="address">
             Delivery Address
             <input
               id="address"
               type="text"
-              className="form-control"
+              className="form-control w-100"
               value={ address }
               onChange={ (e) => setAddress(e.target.value) }
               data-testid="customer_checkout__input-address"
@@ -182,11 +182,11 @@ export default function CustomerCheckout() {
           </label>
         </div>
 
-        <div>
-          <label className="form-label" htmlFor="number">
+        <div className="form-group">
+          <label htmlFor="number">
             Delivery Number
             <input
-              className="form-control"
+              className="form-control w-100"
               data-testid="customer_checkout__input-address-number"
               type="number"
               id="number"

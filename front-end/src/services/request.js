@@ -4,7 +4,7 @@ const api = {
   delete: {
     async deleteUser(id, authorization) {
       const response = await axios.delete(
-        `${process.env.API}/users/admin/${id}`,
+        `${process.env.REACT_APP_API_PORT}/users/admin/${id}`,
         { headers: { authorization } },
       );
       return response;
@@ -13,7 +13,7 @@ const api = {
   post: {
     async newAdminRegister(userData, token) {
       const response = await axios.post(
-        `${process.env.API}/register/admin`,
+        `${process.env.REACT_APP_API_PORT}/register/admin`,
         userData,
         { headers: { authorization: token } },
       );
@@ -21,14 +21,14 @@ const api = {
     },
     async login(userData) {
       const response = await axios.post(
-        `${process.env.API}/login`,
+        `${process.env.REACT_APP_API_PORT}/login`,
         userData,
       );
       return response;
     },
     async register(userData) {
       const response = await axios.post(
-        `${process.env.API}/register`,
+        `${process.env.REACT_APP_API_PORT}/register`,
         userData,
       );
       return response;
@@ -36,7 +36,7 @@ const api = {
 
     async createSale(token, saleData) {
       const response = await axios.post(
-        `${process.env.API}/sales`,
+        `${process.env.REACT_APP_API_PORT}/sales`,
         saleData,
         { headers: { authorization: token } },
       );
@@ -45,15 +45,15 @@ const api = {
   },
   get: {
     async getAllProducts() {
-      const response = await axios.get(`${process.env.API}/products`);
+      const response = await axios.get(`${process.env.REACT_APP_API_PORT}/products`);
       return response;
     },
     async getById(id) {
-      const response = await axios.get(`${process.env.API}/products/${id}`);
+      const response = await axios.get(`${process.env.REACT_APP_API_PORT}/products/${id}`);
       return response;
     },
     async getSales(token) {
-      const response = await axios.get(`${process.env.API}/sales`, {
+      const response = await axios.get(`${process.env.REACT_APP_API_PORT}/sales`, {
         headers: {
           authorization: `${token}`,
         },
@@ -61,7 +61,7 @@ const api = {
       return response;
     },
     async getSaleById(id, token) {
-      const response = await axios.get(`${process.env.API}/sales/${id}`, {
+      const response = await axios.get(`${process.env.REACT_APP_API_PORT}/sales/${id}`, {
         headers: {
           authorization: `${token}`,
         },
@@ -69,18 +69,18 @@ const api = {
       return response;
     },
     async getAllUsers() {
-      const response = await axios.get(`${process.env.API}/users`);
+      const response = await axios.get(`${process.env.REACT_APP_API_PORT}/users`);
       return response;
     },
     async getAllSaleOrders() {
-      const response = await axios.get(`${process.env.API}/seller/orders`);
+      const response = await axios.get(`${process.env.REACT_APP_API_PORT}/seller/orders`);
       return response;
     },
   },
   put: {
     async updateStatus(token, status, id) {
       const response = await axios.put(
-        `${process.env.API}/sales/${id}`,
+        `${process.env.REACT_APP_API_PORT}/sales/${id}`,
         { status },
         { headers: {
           authorization: token,

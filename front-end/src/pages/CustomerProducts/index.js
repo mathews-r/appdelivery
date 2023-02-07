@@ -10,11 +10,11 @@ function CustomerProducts() {
   const [total, setTotal] = useState();
   const [isActive, setIsActive] = useState(true);
 
-  async function loadProducts() {
+  const loadProducts = async () => {
     await api.get.getAllProducts().then(({ data }) => {
       setProducts(data);
     });
-  }
+  };
 
   const getTotal = (storage) => {
     if (storage) {

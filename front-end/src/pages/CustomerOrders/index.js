@@ -6,11 +6,11 @@ import api from '../../services/request';
 export default function CustomerOrders() {
   const [orders, setOrders] = useState([]);
 
-  async function getOrders() {
+  const getOrders = async () => {
     const getStorage = JSON.parse(localStorage.getItem('user'));
     const { data } = await api.get.getSales(getStorage.token);
     setOrders([...data] || []);
-  }
+  };
   useEffect(() => {
     getOrders();
   }, []);

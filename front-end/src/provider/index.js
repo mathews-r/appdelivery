@@ -26,11 +26,11 @@ export default function UserProvider({ children }) {
     }
   };
 
-  function logOut() {
+  const logOut = () => {
     localStorage.removeItem('user');
     navigate('/login');
     setUserData(null);
-  }
+  };
 
   const context = useMemo(() => ({
     userData,

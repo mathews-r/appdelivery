@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { userContext } from '../../context';
+import logo from '../../images/logo.png';
 
 function Login() {
   const userEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -42,6 +43,9 @@ function Login() {
       style={ { minHeight: '100vh', backgroundColor: '#fafafa' } }
       className="d-flex align-items-center justify-content-center d-flex flex-column"
     >
+      <div className="card-logo">
+        <img className="img-thumbnail" src={ logo } alt="Logo da empresa" />
+      </div>
       <h5 className="display-5 text-center">SIGN IN</h5>
       <form className="d-flex gap-3 flex-column">
         <div className="form-group">

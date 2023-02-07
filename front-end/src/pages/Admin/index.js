@@ -16,7 +16,7 @@ export default function AdminManage() {
   const [isDeleted, setIsDeleted] = useState(false);
   const userEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  async function RegisterBtn(e) {
+  const RegisterBtn = async (e) => {
     e.preventDefault();
     const { token } = JSON.parse(localStorage.getItem('user'));
     try {
@@ -27,18 +27,18 @@ export default function AdminManage() {
       setErrorMsg(error.response.data.message);
       setIsExist(true);
     }
-  }
+  };
 
-  async function deleteUser(id) {
+  const deleteUser = async (id) => {
     const { token } = JSON.parse(localStorage.getItem('user'));
     await api.delete.deleteUser(id, token);
     setIsDeleted(!isDeleted);
-  }
+  };
 
-  async function getUsers() {
+  const getUsers = async () => {
     const allUsers = await api.get.getAllUsers();
     setUsers(allUsers.data);
-  }
+  };
 
   useEffect(() => {
     getUsers();

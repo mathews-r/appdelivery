@@ -17,7 +17,7 @@ function Register() {
   const register = async () => {
     try {
       await api.post.register({ name, email, password });
-      JSON.stringify(localStorage.setItem('user', { name, name, email }));
+      localStorage.setItem('user', JSON.stringify({ name, email, password }));
       setIsLogged(true);
       navigate('/customer/products');
     } catch (error) {

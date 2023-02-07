@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { Link } from 'react-router-dom';
 import PropTypes, { string, number } from 'prop-types';
 import moment from 'moment';
 

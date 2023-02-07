@@ -11,12 +11,12 @@ function SaleOrderDetail() {
 
   const { seller, totalPrice } = orders;
 
-  async function getOrders() {
+  const getOrders = async () => {
     const { token } = JSON.parse(localStorage.getItem('user'));
     const { data } = await api.get.getSaleById(idVenda, token);
     setSelect(data.status);
     setOrders({ ...data });
-  }
+  };
 
   const updateStatus = async () => {
     const { token } = JSON.parse(localStorage.getItem('user'));

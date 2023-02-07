@@ -8,9 +8,9 @@ export default function UserProvider({ children }) {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
 
-  function storageUser(data) {
+  const storageUser = (data) => {
     localStorage.setItem('user', JSON.stringify(data));
-  }
+  };
 
   const signIn = async (email, password) => {
     try {

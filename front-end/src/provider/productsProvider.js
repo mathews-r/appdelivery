@@ -3,10 +3,11 @@ import { useMemo } from 'react';
 import { productsContext } from '../context';
 
 export default function ProductsProvider({ children }) {
-  function getTotal() {
+  const getTotal = () => {
     const totalPrice = localStor.reduce((acc, curr) => acc + curr.subTotal, 0);
     return totalPrice;
-  }
+  };
+
   const context = useMemo(() => ({
     getTotal,
   }), []);

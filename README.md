@@ -13,7 +13,7 @@ Se a pessoa cliente faz o pedido, o mesmo deve aparecer para a pessoa vendedora 
 
 Link da aplicação funcionando: https://wry-potato-production.up.railway.app/login
 
-![image](https://user-images.githubusercontent.com/83560101/205159385-2ec0d63e-d131-470b-8a1f-9d316d9bf7cd.png)
+![image](https://user-images.githubusercontent.com/83560101/217269669-0d75cacf-a600-4f03-961f-429a1a3be142.png)
 
 
 ## ⚙️ Funcionalidades

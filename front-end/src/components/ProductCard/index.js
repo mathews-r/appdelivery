@@ -10,7 +10,6 @@ export default function ProductCard({
   setIsActive,
 }) {
   const [quantity, setQuantity] = useState(0);
-  console.log(image);
 
   const updateLocalStorage = (newQuantity) => {
     const arrCart = JSON.parse(localStorage.getItem('carrinho'));
